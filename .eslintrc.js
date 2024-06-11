@@ -24,7 +24,7 @@ module.exports = {
   parserOptions: {
     ecmaVersion: "latest",
     sourceType: "module",
-    project: ["./tsconfig.json"]
+    project: "./tsconfig.eslint.json"
   },
   plugins: ["@typescript-eslint"],
   rules: {
@@ -34,6 +34,7 @@ module.exports = {
     "global-require": 0,
     "eslint linebreak-style": [0, "error", "windows"],
     "@typescript-eslint/comma-dangle": 0,
-    "no-new": 0
+    "no-new": 0,
+    "no-console": "off"
   }
 };

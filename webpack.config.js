@@ -3,7 +3,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
 
 module.exports = {
-  // entry: './src/index.js' if you unuse typescript entry
   entry: './src/index.ts',
   output: {
     filename: 'src/[name].[fullhash].js',
@@ -13,53 +12,57 @@ module.exports = {
     rules: [
       {
         test: /\.m?js$/,
-        exclude: /(node_modules|bower_components)/,
+        exclude: /(node_modules|bower_components)/, 
         use: {
-          loader: 'babel-loader',
+          loader: 'babel-loader', 
           options: {
-            presets: ['@babel/preset-env'],
-            plugins: ['@babel/plugin-transform-object-rest-spread']
+            presets: ['@babel/preset-env'], 
+            plugins: ['@babel/plugin-transform-object-rest-spread'] 
           }
         }
       },
       {
+        // Règle pour les fichiers SCSS/SASS
         test: /\.s[ac]ss$/i,
         use: [
-          "style-loader",
-          "css-loader",
-          "sass-loader",
+          "style-loader", 
+          "css-loader",   
+          "sass-loader",  
         ],
       },
-      { test: /\.ts$/, use: 'ts-loader' }
+      {
+        test: /\.ts$/,
+        use: 'ts-loader' 
+      }
     ],
   },
   resolve: {
-    extensions: ['.ts', '.js'],
+    extensions: ['.ts', '.js'], 
   },
   devServer: {
-    historyApiFallback: true,
-    host: '127.0.0.1',
-    port: 9090,
-    open: true,
-    hot: true,
+    historyApiFallback: true, 
+    host: '127.0.0.1',       
+    port: 9090,             
+    open: true,              
+    hot: true,               
     client: {
-      logging: 'info',
-      overlay: true,
-      progress: true,
+      logging: 'info',       
+      overlay: true,         
+      progress: true,          
       webSocketTransport: 'ws'
     },
-    webSocketServer: 'ws'
+    webSocketServer: 'ws'     
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'src/index.html'),
-      inject: 'body',
-      hash: true
+      inject: 'body', 
+      hash: true 
     }),
     new ESLintPlugin({
-      extensions: ['js', 'ts'],
-      exclude: 'node_modules',
-      files: './src/'
+      extensions: ['js', 'ts'], 
+      exclude: 'node_modules',  
+      files: './src/'           
     })
   ]
 };
