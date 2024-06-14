@@ -1,5 +1,5 @@
 @charset "utf-8";
-@import 'normalize.css';
+@import 'node_modules/normalize.css';
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css");
 
@@ -25,10 +25,10 @@ body, html {
 
 .container {
   max-width: 1200px;
-  margin: auto;
+  margin: 0 auto;
   padding: 20px;
+  flex: 1;
 }
-
 
 header {
   background: $secondary-color;
@@ -38,7 +38,6 @@ header {
   position: sticky;
   top: 0;
   z-index: 1000;
-  width: 100%;
 }
 
 header .container {
@@ -63,25 +62,28 @@ nav ul {
   display: flex;
   padding: 0;
   margin: 0;
+  align-items: center; /* Center vertically */
 }
 
 nav ul li {
-  margin: 0 20px;
+  margin: 0 10px;
 }
 
 nav ul li a {
   color: white;
   text-decoration: none;
   font-weight: 600;
-  padding: 0.8rem 1.2rem;
-  border-radius: 10px;
+  padding: 0.6rem 1.2rem; /* Uniform padding */
+  border-radius: 5px;
   transition: background 0.3s, box-shadow 0.3s;
   display: flex;
   align-items: center;
+  font-size: 1rem; /* Uniform text size */
 }
 
 nav ul li a i {
   margin-right: 5px;
+  font-size: 1rem; /* Uniform icon size */
 }
 
 nav ul li a:hover {
@@ -91,43 +93,13 @@ nav ul li a:hover {
 
 main {
   flex: 1;
-  padding: 3rem 0; /* Augmentation de la marge pour éviter le chevauchement */
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  min-height: calc(100vh - 120px); /* Ajouter un calcul pour l'espace du header/footer */
-}
-
-.dashboard-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr); /* 2 colonnes */
-  gap: 20px;
-  width: 100%;
-}
-
-.card {
+  padding: 2rem 0;
   background: white;
-  border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-  padding: 20px;
-  text-align: center;
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-
-
-.card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
-}
-
-.card h3 {
-  margin-bottom: 10px;
-}
-
-.card ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+  border-radius: 8px;
 }
 
 nav ul li .dropdown-content {
@@ -185,39 +157,97 @@ nav ul li .dropdown-content.hidden {
   pointer-events: none; /* Désactive les événements */
 }
 
-.card ul li {
-  background: $background-gradient;
-  border: 1px solid $primary-color;
-  padding: 10px;
-  border-radius: 5px;
-  margin-bottom: 10px;
+.manage-container {
+  width: 100%;
+  text-align: center; /* Center content horizontally */
+}
+
+.manage-header {
+  text-align: center;
+  margin-bottom: 40px;
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: $primary-color;
+}
+
+.events-grid {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  transition: background-color 0.3s;
+  justify-content: center; /* Center horizontally */
+  flex-wrap: wrap; /* Allow wrapping */
+  gap: 20px; /* Space between cards */
+  padding: 20px;
 }
 
-.card ul li:hover {
-  background-color: lighten($primary-color, 20%);
+.event-card {
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s;
+  width: 300px; /* Ensure consistent width for cards */
+  margin: 0 10px; /* Margin for spacing */
 }
 
-.card ul li i {
-  margin-right: 10px;
+.event-card:hover {
+  transform: translateY(-10px);
 }
 
-.view-details {
-  background-color: $primary-color;
+.event-header {
+  background: $primary-color;
   color: white;
-  border: none;
-  padding: 5px 10px;
+  padding: 15px;
+  text-align: center;
+}
+
+.event-body {
+  flex: 1;
+  padding: 15px;
+}
+
+.event-footer {
+  display: flex;
+  justify-content: space-around;
+  padding: 15px;
+  background: #f9f9f9;
+}
+
+.event-footer .btn {
+  padding: 10px 15px;
   border-radius: 5px;
-  cursor: pointer;
+  text-decoration: none;
+  color: white;
   transition: background-color 0.3s, transform 0.3s;
 }
 
-.view-details:hover {
-  background-color: darken($primary-color, 10%);
+.event-footer .btn:hover {
   transform: scale(1.05);
+}
+
+.btn-primary {
+  background-color: $primary-color;
+}
+
+.btn-primary:hover {
+  background-color: darken($primary-color, 10%);
+}
+
+.btn-danger {
+  background-color: $danger-color;
+}
+
+.btn-danger:hover {
+  background-color: darken($danger-color, 10%);
+}
+
+.alert {
+  padding: 15px;
+  color: white;
+  background-color: $success-color;
+  text-align: center;
+  border-radius: 5px;
+  margin-bottom: 20px;
 }
 
 footer {
@@ -250,6 +280,100 @@ footer .social-media a:hover {
   color: darken($secondary-color, 10%);
 }
 
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+  transition: all 0.3s ease;
+}
+
+.modal.show {
+  display: block;
+  animation: fadeIn 0.5s;
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 500px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  animation: fadeInUp 0.5s;
+}
+
+.modal-buttons {
+  margin-top: 20px;
+}
+
+.modal-buttons .btn {
+  margin: 5px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.success-message {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 300px;
+  background: #28a745;
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  display: none;
+  animation: fadeInUp 0.5s;
+}
+
+.success-message.show {
+  display: block;
+}
+
+.message-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.progress-bar {
+  height: 5px;
+  background: #218838;
+  width: 0;
+  margin-top: 10px;
+  animation: progressBar 3s linear forwards;
+}
+
 @media (max-width: 768px) {
   nav ul {
     flex-direction: column;
@@ -259,8 +383,8 @@ footer .social-media a:hover {
     margin: 10px 0;
   }
 
-  .dashboard-grid {
-    grid-template-columns: 1fr; /* Une seule colonne sur petits écrans */
+  .form-container {
+    width: 90%;
   }
 
   footer .footer-content {
@@ -271,3 +395,13 @@ footer .social-media a:hover {
     margin-top: 10px;
   }
 }
+
+@keyframes progressBar {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
+}
+

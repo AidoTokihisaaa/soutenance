@@ -24,29 +24,27 @@ function getUnreadNotificationCount($link, $userId) {
     return $stmt->fetchColumn();
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $title = $_POST['title'] ?? '';
-    $description = $_POST['description'] ?? '';
-    $date = $_POST['date'] ?? '';
-
-    if (!$title || !$description || !$date) {
-        $_SESSION['error'] = "Tous les champs sont requis.";
+if (isset($_GET['action']) && $_GET['action'] == 'delete' && isset($_GET['id'])) {
+    $eventId = $_GET['id'];
+    $stmt = $link->prepare("DELETE FROM events WHERE id = :id AND user_id = :user_id");
+    $stmt->bindParam(':id', $eventId, PDO::PARAM_INT);
+    $stmt->bindParam(':user_id', $_SESSION['id'], PDO::PARAM_INT);
+    if ($stmt->execute()) {
+        $_SESSION['success'] = "Événement supprimé avec succès.";
+        addNotification($link, $_SESSION['id'], "Événement supprimé avec succès.");
+        header('Location: manage.php');
+        exit;
     } else {
-        $stmt = $link->prepare("INSERT INTO events (name, description, date, user_id, created_at, updated_at) VALUES (:name, :description, :date, :user_id, NOW(), NOW())");
-        $stmt->bindParam(':name', $title);
-        $stmt->bindParam(':description', $description);
-        $stmt->bindParam(':date', $date);
-        $stmt->bindParam(':user_id', $_SESSION['id']);
-        if ($stmt->execute()) {
-            $_SESSION['success'] = "Événement créé avec succès.";
-            addNotification($link, $_SESSION['id'], "Événement créé avec succès.");
-            header('Location: manage.php');
-            exit;
-        } else {
-            $_SESSION['error'] = "Erreur lors de la création de l'événement.";
-        }
+        $_SESSION['error'] = "Erreur lors de la suppression de l'événement.";
+        header('Location: manage.php');
+        exit;
     }
 }
+
+$stmt = $link->prepare("SELECT id, name, description, date, created_at FROM events WHERE user_id = :user_id ORDER BY date ASC");
+$stmt->bindParam(':user_id', $_SESSION['id'], PDO::PARAM_INT);
+$stmt->execute();
+$events = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 $unreadCount = getUnreadNotificationCount($link, $_SESSION['id']);
 ?>
@@ -55,8 +53,8 @@ $unreadCount = getUnreadNotificationCount($link, $_SESSION['id']);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Créer un Événement</title>
-    <link rel="stylesheet" href="../../../css/create.css">
+    <title>Gérer les Événements</title>
+    <link rel="stylesheet" href="../../../css/manage.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 </head>
 <body>
@@ -69,6 +67,7 @@ $unreadCount = getUnreadNotificationCount($link, $_SESSION['id']);
             <ul>
                 <li><a href="../../../index.php"><i class="fas fa-home"></i> Accueil</a></li>
                 <li><a href="../event/create.php"><i class="fas fa-plus-circle"></i> Créer un Événement</a></li>
+                <li><a href="../user/dashboard.php"><i class="fas fa-tasks"></i> Dashboard</a></li>
                 <li><a href="../event/manage.php"><i class="fas fa-tasks"></i> Gérer les Événements</a></li>
                 <li class="user-menu">
                     <a href="#" id="user-icon"><i class="fas fa-user"></i></a>
@@ -98,37 +97,52 @@ $unreadCount = getUnreadNotificationCount($link, $_SESSION['id']);
         </nav>
     </div>
 </header>
-<div class="event-form-container">
-    <h1>Créer un Événement</h1>
+<div class="manage-container">
+    <h1>Gérer les Événements</h1>
     <?php if (isset($_SESSION['error'])): ?>
         <div class="alert alert-danger">
-            <?php echo $_SESSION['error']; unset($_SESSION['error']); ?>
+            <?= $_SESSION['error']; unset($_SESSION['error']); ?>
         </div>
     <?php endif; ?>
-    <form action="" method="post">
-        <div class="form-group">
-            <label for="title">Titre de l'événement:</label>
-            <input type="text" id="title" name="title" required>
-        </div>
-        <div class="form-group">
-            <label for="description">Description:</label>
-            <textarea id="description" name="description" required></textarea>
-        </div>
-        <div class="form-group">
-            <label for="date">Date:</label>
-            <input type="date" id="date" name="date" required>
-        </div>
-        <button type="submit" class="btn">Créer l'événement</button>
-    </form>
+    <?php if (isset($_SESSION['success'])): ?>
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Succès',
+                text: '<?= $_SESSION['success']; ?>',
+                showConfirmButton: false,
+                timer: 3000
+            });
+            <?php unset($_SESSION['success']); ?>
+        </script>
+    <?php endif; ?>
+    <div class="events-grid">
+        <?php foreach ($events as $event): ?>
+            <div class="event-card">
+                <div class="event-header">
+                    <h3><?= htmlspecialchars($event['name']); ?></h3>
+                </div>
+                <div class="event-body">
+                    <p><?= htmlspecialchars($event['description']); ?></p>
+                    <p><strong>Date:</strong> <?= htmlspecialchars(date('d-m-Y', strtotime($event['date']))); ?></p>
+                    <p><strong>Créé:</strong> <?= htmlspecialchars(date('d-m-Y H:i:s', strtotime($event['created_at']))); ?></p>
+                </div>
+                <div class="event-footer">
+                    <a href="edit.php?id=<?= $event['id']; ?>" class="btn btn-primary">Modifier</a>
+                    <a href="?action=delete&id=<?= $event['id']; ?>" class="btn btn-danger">Supprimer</a>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    </div>
 </div>
 <footer>
     <div class="container">
         <div class="footer-content">
             <div class="social-media">
                 <a href="#"><i class="fab fa-facebook-f"></i></a>
-                <a href="#"><i the "fab fa-twitter"></i></a>
-                <a href="#"><i the "fab fa-instagram"></i></a>
-                <a href="#"><i the "fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
             </div>
             <p>&copy; 2024 AppEvent. Tous droits réservés.</p>
         </div>

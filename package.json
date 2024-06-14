@@ -7,7 +7,8 @@
     "dev": "webpack serve --mode development --open browser-sync start --proxy 'localhost/app-event' --files 'src/**/*.php, public/css/*.css, public/js/*.js'",
     "build": "webpack --mode production",
     "lint": "eslint 'src/**/*.{js,ts}' --fix",
-    "sass": "sass index.scss css/index.css && sass css/dashboard.scss css/dashboard.css && sass css/auth.scss css/auth.css && sass css/create.scss css/create.css"
+    "sass": "sass index.scss css/index.css && sass css/dashboard.scss css/dashboard.css && sass css/auth.scss css/auth.css && sass css/create.scss css/create.css && sass css/manage.scss css/manage.css && sass css/edit.scss css/edit.css && sass css/"
+
   },
   "repository": {
     "type": "git",

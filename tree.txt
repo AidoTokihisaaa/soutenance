@@ -36,15 +36,24 @@ C:.
 |       |       create.php
 |       |       edit.php
 |       |       index.php
+|       |       manage.php
 |       |       
 |       \---user
 |               dashboard.php
 |               forgot_password.php
 |               login.php
+|               logout.php
 |               register.php
 |               
 +---css
+|       auth.css
+|       auth.css.map
 |       auth.scss
+|       create.css
+|       create.css.map
+|       create.scss
+|       dashboard.css
+|       dashboard.css.map
 |       dashboard.scss
 |       index.css
 |       index.css.map
@@ -24057,6 +24066,7 @@ C:.
 |           package.json
 |           readme.md
 |           
++---public
 \---src
         index.ts
         

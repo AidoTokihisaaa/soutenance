@@ -29,10 +29,9 @@
             <div class="container">
                 <h2>Bienvenue sur AppEvent</h2>
                 <p>Prenez les rênes de vos événements avec AppEvent, votre compagnon d'organisation parfait, intuitif et puissant.</p>
-                <button class="cta-button"><i class="fas fa-play"></i> Explorez dès maintenant</button>
+                <a href="backend/views/user/login.php" class="cta-button"><i class="fas fa-play"></i> Explorez dès maintenant</a>
             </div>
         </section>
-
         <section class="features">
             <div class="container">
                 <div class="card">
