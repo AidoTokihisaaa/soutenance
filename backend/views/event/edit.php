@@ -26,7 +26,41 @@ if (!$event) {
     header('Location: manage.php');
     exit;
 }
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+function addNotification($link, $userId, $message) {
+    $stmt = $link->prepare("INSERT INTO notifications (user_id, message) VALUES (:user_id, :message)");
+    $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
+    $stmt->bindParam(':message', $message, PDO::PARAM_STR);
+    $stmt->execute();
+}
+
+function getUnreadNotifications($link, $userId) {
+    $stmt = $link->prepare('SELECT message, created_at FROM notifications WHERE user_id = ? AND is_read = 0 ORDER BY created_at DESC');
+    $stmt->bindParam(1, $userId, PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_OBJ);
+}
+
+function getUnreadNotificationCount($link, $userId) {
+    $stmt = $link->prepare("SELECT COUNT(*) FROM notifications WHERE user_id = :user_id AND is_read = 0");
+    $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetchColumn();
+}
+
+function markNotificationsAsRead($link, $userId) {
+    $stmt = $link->prepare('UPDATE notifications SET is_read = 1 WHERE user_id = ? AND is_read = 0');
+    $stmt->bindParam(1, $userId, PDO::PARAM_INT);
+    $stmt->execute();
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['mark_read'])) {
+    markNotificationsAsRead($link, $_SESSION['id']);
+    header('Location: edit.php?id=' . $eventId);
+    exit;
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['mark_read'])) {
     $title = $_POST['title'] ?? '';
     $description = $_POST['description'] ?? '';
     $date = $_POST['date'] ?? '';
@@ -40,7 +74,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $updateStmt->bindParam(':date', $date);
         $updateStmt->bindParam(':id', $eventId);
         if ($updateStmt->execute()) {
-            $_SESSION['message'] = "Événement mis à jour avec succès.";
+            $_SESSION['success'] = "Événement mis à jour avec succès.";
+            addNotification($link, $_SESSION['id'], "Événement mis à jour avec succès.");
             header('Location: manage.php');
             exit;
         } else {
@@ -48,6 +83,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 }
+
+$unreadNotifications = getUnreadNotifications($link, $_SESSION['id']);
+$unreadCount = count($unreadNotifications);
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -55,6 +93,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../../css/edit.css">
+    <link rel="stylesheet" href="../../../css/notifications.css">
     <title>Tableau de Bord - AppEvent</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
 </head>
@@ -69,14 +108,46 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <li><a href="../../../index.php"><i class="fas fa-home"></i> Accueil</a></li>
                 <li><a href="../event/create.php"><i class="fas fa-plus-circle"></i> Créer un Événement</a></li>
                 <li><a href="../event/manage.php"><i class="fas fa-tasks"></i> Gérer les Événements</a></li>
+                <li><a href="../user/dashboard.php"><i class="fas fa-tasks"></i> Dashboard</a></li>
                 <li class="user-menu">
                     <a href="#" id="user-icon"><i class="fas fa-user"></i></a>
                     <div class="dropdown-content">
                         <div class="user-info">
-                            <p><strong>Nom:</strong> <?= htmlspecialchars($userInfo['username'] ?? 'N/A') ?></p>
-                            <p><strong>Email:</strong> <?= htmlspecialchars($userInfo['email'] ?? 'N/A') ?></p>
+                            <p><strong>Nom:</strong> <?= htmlspecialchars($_SESSION['username'] ?? 'N/A') ?></p>
+                            <p><strong>Email:</strong> <?= htmlspecialchars($_SESSION['email'] ?? 'N/A') ?></p>
                         </div>
                         <a href="../user/logout.php" class="logout"><i class="fas fa-sign-out-alt"></i> Déconnexion</a>
+                    </div>
+                </li>
+                <li class="notification-menu">
+                    <a href="#" id="notification-icon">
+                        <i class="fas fa-bell"></i>
+                        <?php if ($unreadCount > 0): ?>
+                            <span class="notification-count"><?= $unreadCount ?></span>
+                        <?php endif; ?>
+                    </a>
+                    <div class="dropdown-content notifications">
+                        <h3>Notifications</h3>
+                        <ul id="notification-list">
+                            <?php if (empty($unreadNotifications)): ?>
+                                <li><i class="fas fa-info-circle"></i> Aucune nouvelle notification pour le moment.</li>
+                            <?php else: ?>
+                                <?php foreach ($unreadNotifications as $notification): ?>
+                                    <li>
+                                        <i class="fas fa-info-circle"></i>
+                                        <?= htmlspecialchars($notification->message) ?>
+                                        <br>
+                                        <small><?= htmlspecialchars(date('d-m-Y H:i:s', strtotime($notification->created_at))) ?></small>
+                                    </li>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
+                        </ul>
+                        <?php if ($unreadCount > 0): ?>
+                            <form method="post" style="text-align: center;">
+                                <input type="hidden" name="mark_read" value="1">
+                                <button type="submit" class="btn">Marquer comme lu</button>
+                            </form>
+                        <?php endif; ?>
                     </div>
                 </li>
             </ul>
@@ -126,30 +197,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 </footer>
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const userIcon = document.getElementById('user-icon');
-        const dropdown = document.querySelector('.dropdown-content');
+document.addEventListener("DOMContentLoaded", function() {
+    const userIcon = document.getElementById('user-icon');
+    const dropdown = document.querySelector('.dropdown-content');
+    const notificationIcon = document.getElementById('notification-icon');
+    const notificationDropdown = document.querySelector('.notifications');
 
-        userIcon.addEventListener('click', function(event) {
-            event.preventDefault();
+    userIcon.addEventListener('click', function(event) {
+        event.preventDefault();
+        dropdown.classList.toggle('show');
+    });
+
+    notificationIcon.addEventListener('click', function(event) {
+        event.preventDefault();
+        notificationDropdown.classList.toggle('show');
+    });
+
+    window.onclick = function(event) {
+        if (!event.target.matches('#user-icon') && !dropdown.contains(event.target)) {
             if (dropdown.classList.contains('show')) {
                 dropdown.classList.remove('show');
-                dropdown.classList.add('hidden');
-            } else {
-                dropdown.classList.remove('hidden');
-                dropdown.classList.add('show');
             }
-        });
-
-        window.onclick = function(event) {
-            if (!event.target.matches('#user-icon') && !event.target.matches('.dropdown-content') && !dropdown.contains(event.target)) {
-                if (dropdown.classList.contains('show')) {
-                    dropdown.classList.remove('show');
-                    dropdown.classList.add('hidden');
-                }
+        }
+        if (!event.target.matches('#notification-icon') && !notificationDropdown.contains(event.target)) {
+            if (notificationDropdown.classList.contains('show')) {
+                notificationDropdown.classList.remove('show');
             }
-        };
-    });
+        }
+    };
+});
 </script>
 </body>
 </html>

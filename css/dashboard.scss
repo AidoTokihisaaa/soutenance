@@ -45,15 +45,28 @@ header .container {
   align-items: center;
 }
 
+header .logo {
+  display: flex;
+  align-items: center;
+  margin-right: auto; /* Pousse la nav vers le centre */
+}
+
 header .logo h1 {
-  font-size: 2rem;
+  font-size: 1.2rem; /* Taille uniforme */
   font-weight: bold;
   display: flex;
   align-items: center;
 }
 
 header .logo i {
-  margin-right: 10px;
+  margin-right: 8px;
+  font-size: 1.2rem; /* Taille uniforme */
+}
+
+nav {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center; /* Centre la nav */
 }
 
 nav ul {
@@ -61,26 +74,28 @@ nav ul {
   display: flex;
   padding: 0;
   margin: 0;
+  align-items: center;
 }
 
 nav ul li {
-  margin: 0 10px;
-  position: relative;
+  margin: 0 8px;
 }
 
 nav ul li a {
   color: white;
   text-decoration: none;
   font-weight: 600;
-  padding: 0.5rem 1rem;
+  padding: 0.4rem 0.8rem; /* Uniform padding */
   border-radius: 5px;
   transition: background 0.3s, box-shadow 0.3s;
   display: flex;
   align-items: center;
+  font-size: 0.9rem; /* Taille uniforme du texte */
 }
 
 nav ul li a i {
   margin-right: 5px;
+  font-size: 0.9rem; /* Taille uniforme des icônes */
 }
 
 nav ul li a:hover {
@@ -267,7 +282,99 @@ footer .social-media a {
 footer .social-media a:hover {
   color: darken($secondary-color, 10%);
 }
+/* notifications.css */
+.notification-menu {
+  position: relative;
+}
 
+.notification-count {
+  background-color: #e74c3c;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 0.8rem;
+  position: absolute;
+  top: -5px;
+  right: -5px;
+}
+
+.notifications {
+  display: none;
+  position: absolute;
+  background-color: white;
+  color: #34495e;
+  min-width: 250px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+  right: 0;
+  border-radius: 10px;
+  overflow: hidden;
+  padding: 20px;
+  transition: all 0.3s ease;
+}
+
+.notifications h3 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.notifications ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.notifications ul li {
+  padding: 10px;
+  border-bottom: 1px solid #ecf0f1;
+}
+
+.notifications ul li:last-child {
+  border-bottom: none;
+}
+
+.notifications ul li i {
+  margin-right: 10px;
+  color: #2980b9;
+}
+
+.notifications ul li small {
+  display: block;
+  color: #7f8c8d;
+  font-size: 0.8rem;
+}
+
+.notifications.show {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.notifications.hidden {
+  opacity: 0;
+  transform: translateY(-10px);
+  pointer-events: none;
+}
+
+.btn {
+  display: inline-block;
+  background-color: #34495e;
+  color: #fff;
+  border: none;
+  padding: 8px 15px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+  margin-top: 10px;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.btn:hover {
+  background-color: darken(#34495e, 10%);
+}
 @media (max-width: 768px) {
   nav ul {
     flex-direction: column;

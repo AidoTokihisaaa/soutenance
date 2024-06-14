@@ -18,7 +18,7 @@ function getUserInfo($link, $userId) {
 }
 
 function getUpcomingEvents($link, $userId) {
-    $stmt = $link->prepare('SELECT name, date, description, created_at, updated_at FROM events WHERE user_id = ? AND date >= CURDATE() ORDER BY date ASC');
+    $stmt = $link->prepare('SELECT id, name, date, description, created_at, updated_at FROM events WHERE user_id = ? AND date >= CURDATE() ORDER BY date ASC');
     $stmt->bindParam(1, $userId, PDO::PARAM_INT);
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_OBJ);
@@ -129,7 +129,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['mark_read'])) {
                                 <span><?= htmlspecialchars($event->name) ?> - <?= htmlspecialchars($event->date) ?></span>
                                 <p>Créé: <?= htmlspecialchars(date('d-m-Y H:i:s', strtotime($event->created_at))) ?></p>
                                 <p>Mis à jour: <?= htmlspecialchars(date('d-m-Y H:i:s', strtotime($event->updated_at))) ?></p>
-                                <button class="view-details" data-name="<?= htmlspecialchars($event->name) ?>" data-date="<?= htmlspecialchars($event->date) ?>" data-description="<?= htmlspecialchars($event->description) ?>">Voir détails</button>
+                                <a href="../event/view.php?id=<?= $event->id ?>" class="btn btn-primary">Voir détails</a>
                             </li>
                         <?php endforeach; ?>
                     <?php endif; ?>

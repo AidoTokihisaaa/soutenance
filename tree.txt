@@ -35,7 +35,6 @@ C:.
 |       +---event
 |       |       create.php
 |       |       edit.php
-|       |       index.php
 |       |       manage.php
 |       |       
 |       \---user
@@ -55,8 +54,16 @@ C:.
 |       dashboard.css
 |       dashboard.css.map
 |       dashboard.scss
+|       edit.css
+|       edit.css.map
+|       edit.scss
 |       index.css
 |       index.css.map
+|       manage.css
+|       manage.css.map
+|       manage.scss
+|       reset.css
+|       reset.css.map
 |       reset.scss
 |       
 +---frontend
@@ -69,6 +76,7 @@ C:.
 |           api.js
 |           app.js
 |           auth.js
+|           dashboard.js
 |           event.js
 |           user.js
 |           utils.js

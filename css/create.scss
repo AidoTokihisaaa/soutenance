@@ -46,16 +46,28 @@ header .container {
   justify-content: space-between;
   align-items: center;
 }
+header .logo {
+  display: flex;
+  align-items: center;
+  margin-right: auto; /* Pousse la nav vers le centre */
+}
 
 header .logo h1 {
-  font-size: 2.5rem;
+  font-size: 1.2rem; /* Taille uniforme */
   font-weight: bold;
   display: flex;
   align-items: center;
 }
 
 header .logo i {
-  margin-right: 10px;
+  margin-right: 8px;
+  font-size: 1.2rem; /* Taille uniforme */
+}
+
+nav {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center; /* Centre la nav */
 }
 
 nav ul {
@@ -63,25 +75,28 @@ nav ul {
   display: flex;
   padding: 0;
   margin: 0;
+  align-items: center;
 }
 
 nav ul li {
-  margin: 0 20px;
+  margin: 0 8px;
 }
 
 nav ul li a {
   color: white;
   text-decoration: none;
   font-weight: 600;
-  padding: 0.8rem 1.2rem;
-  border-radius: 10px;
+  padding: 0.4rem 0.8rem; /* Uniform padding */
+  border-radius: 5px;
   transition: background 0.3s, box-shadow 0.3s;
   display: flex;
   align-items: center;
+  font-size: 0.9rem; /* Taille uniforme du texte */
 }
 
 nav ul li a i {
   margin-right: 5px;
+  font-size: 0.9rem; /* Taille uniforme des icônes */
 }
 
 nav ul li a:hover {
@@ -248,6 +263,100 @@ footer .social-media a {
 
 footer .social-media a:hover {
   color: darken($secondary-color, 10%);
+}
+/* Styles pour le menu de notification */
+.notification-menu {
+  position: relative;
+}
+
+.notification-menu #notification-icon {
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  position: relative;
+}
+
+.notification-menu #notification-icon .notification-count {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: $danger-color;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 0.75rem;
+}
+
+.notification-menu .notifications {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: white;
+  color: $primary-color;
+  min-width: 250px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+  border-radius: 10px;
+  padding: 20px;
+  transition: all 0.3s ease;
+}
+
+.notification-menu .notifications h3 {
+  margin-top: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: $primary-color;
+  border-bottom: 1px solid $primary-color;
+  padding-bottom: 10px;
+}
+
+.notification-menu .notifications ul {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0;
+}
+
+.notification-menu .notifications ul li {
+  padding: 10px;
+  border-bottom: 1px solid #f0f0f0;
+  display: flex;
+  align-items: center;
+}
+
+.notification-menu .notifications ul li i {
+  margin-right: 10px;
+  color: $primary-color;
+}
+
+.notification-menu .notifications ul li small {
+  color: $text-color;
+  margin-left: auto;
+  font-size: 0.75rem;
+}
+
+.notification-menu .notifications.show {
+  display: block;
+}
+
+.notification-menu .btn {
+  display: block;
+  width: 100%;
+  background-color: $primary-color;
+  color: #fff;
+  border: none;
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+  text-transform: uppercase;
+  margin-top: 10px;
+}
+
+.notification-menu .btn:hover {
+  background-color: darken($primary-color, 10%);
 }
 
 @media (max-width: 768px) {

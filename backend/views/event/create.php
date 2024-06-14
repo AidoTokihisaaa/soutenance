@@ -17,6 +17,13 @@ function addNotification($link, $userId, $message) {
     $stmt->execute();
 }
 
+function getUnreadNotifications($link, $userId) {
+    $stmt = $link->prepare('SELECT message, created_at FROM notifications WHERE user_id = ? AND is_read = 0 ORDER BY created_at DESC');
+    $stmt->bindParam(1, $userId, PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_OBJ);
+}
+
 function getUnreadNotificationCount($link, $userId) {
     $stmt = $link->prepare("SELECT COUNT(*) FROM notifications WHERE user_id = :user_id AND is_read = 0");
     $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
@@ -24,7 +31,19 @@ function getUnreadNotificationCount($link, $userId) {
     return $stmt->fetchColumn();
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+function markNotificationsAsRead($link, $userId) {
+    $stmt = $link->prepare('UPDATE notifications SET is_read = 1 WHERE user_id = ? AND is_read = 0');
+    $stmt->bindParam(1, $userId, PDO::PARAM_INT);
+    $stmt->execute();
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['mark_read'])) {
+    markNotificationsAsRead($link, $_SESSION['id']);
+    header('Location: create.php');
+    exit;
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['mark_read'])) {
     $title = $_POST['title'] ?? '';
     $description = $_POST['description'] ?? '';
     $date = $_POST['date'] ?? '';
@@ -48,7 +67,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-$unreadCount = getUnreadNotificationCount($link, $_SESSION['id']);
+$unreadNotifications = getUnreadNotifications($link, $_SESSION['id']);
+$unreadCount = count($unreadNotifications);
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -70,6 +90,7 @@ $unreadCount = getUnreadNotificationCount($link, $_SESSION['id']);
                 <li><a href="../../../index.php"><i class="fas fa-home"></i> Accueil</a></li>
                 <li><a href="../event/create.php"><i class="fas fa-plus-circle"></i> Créer un Événement</a></li>
                 <li><a href="../event/manage.php"><i class="fas fa-tasks"></i> Gérer les Événements</a></li>
+                <li><a href="../user/dashboard.php"><i class="fas fa-tasks"></i> Dashboard</a></li>
                 <li class="user-menu">
                     <a href="#" id="user-icon"><i class="fas fa-user"></i></a>
                     <div class="dropdown-content">
@@ -90,8 +111,25 @@ $unreadCount = getUnreadNotificationCount($link, $_SESSION['id']);
                     <div class="dropdown-content notifications">
                         <h3>Notifications</h3>
                         <ul id="notification-list">
-                            <li><i class="fas fa-info-circle"></i> Aucune nouvelle notification pour le moment.</li>
+                            <?php if (empty($unreadNotifications)): ?>
+                                <li><i class="fas fa-info-circle"></i> Aucune nouvelle notification pour le moment.</li>
+                            <?php else: ?>
+                                <?php foreach ($unreadNotifications as $notification): ?>
+                                    <li>
+                                        <i class="fas fa-info-circle"></i>
+                                        <?= htmlspecialchars($notification->message) ?>
+                                        <br>
+                                        <small><?= htmlspecialchars(date('d-m-Y H:i:s', strtotime($notification->created_at))) ?></small>
+                                    </li>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
                         </ul>
+                        <?php if ($unreadCount > 0): ?>
+                            <form method="post" style="text-align: center;">
+                                <input type="hidden" name="mark_read" value="1">
+                                <button type="submit" class="btn">Marquer comme lu</button>
+                            </form>
+                        <?php endif; ?>
                     </div>
                 </li>
             </ul>
@@ -126,9 +164,9 @@ $unreadCount = getUnreadNotificationCount($link, $_SESSION['id']);
         <div class="footer-content">
             <div class="social-media">
                 <a href="#"><i class="fab fa-facebook-f"></i></a>
-                <a href="#"><i the "fab fa-twitter"></i></a>
-                <a href="#"><i the "fab fa-instagram"></i></a>
-                <a href="#"><i the "fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
             </div>
             <p>&copy; 2024 AppEvent. Tous droits réservés.</p>
         </div>
