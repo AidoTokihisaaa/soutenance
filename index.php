@@ -24,34 +24,34 @@
             </nav>
         </div>
     </header>
-    <main>
-        <section class="hero">
-            <div class="container">
-                <h2>Bienvenue sur AppEvent</h2>
-                <p>Prenez les rênes de vos événements avec AppEvent, votre compagnon d'organisation parfait, intuitif et puissant.</p>
-                <a href="backend/views/user/login.php" class="cta-button"><i class="fas fa-play"></i> Explorez dès maintenant</a>
+<main>
+    <section class="hero">
+        <div class="container">
+            <h2>Bienvenue sur AppEvent</h2>
+            <p>Découvrez une nouvelle façon d'organiser vos événements. Avec AppEvent, tout devient plus simple. Que vous planifiez une petite réunion ou un grand rassemblement, notre plateforme vous accompagne à chaque étape.</p>
+            <a href="backend/views/user/register.php" class="cta-button"><i class="fas fa-play"></i>Rejoignez-nous</a>
+        </div>
+    </section>
+    <section class="features">
+        <div class="container">
+            <div class="card">
+                <i class="fas fa-calendar-alt"></i>
+                <h3>Organisation Simplifiée</h3>
+                <p>Facilitez la planification et la gestion de vos événements, sans stress ni complications. Avec AppEvent, tout est sous contrôle.</p>
             </div>
-        </section>
-        <section class="features">
-            <div class="container">
-                <div class="card">
-                    <i class="fas fa-calendar-alt"></i>
-                    <h3>Gestion des Événements</h3>
-                    <p>Que ce soit pour planifier, modifier ou surveiller, simplifiez la gestion de vos événements comme jamais auparavant.</p>
-                </div>
-                <div class="card">
-                    <i class="fas fa-users"></i>
-                    <h3>Gestion des Participants</h3>
-                    <p>Optimisez la gestion de vos participants, de l'inscription à la participation effective, tout en fluidité.</p>
-                </div>
-                <div class="card">
-                    <i class="fas fa-share-alt"></i>
-                    <h3>Partage et Promotion</h3>
-                    <p>Élargissez votre audience et boostez la visibilité de vos événements grâce à des outils de partage intégrés.</p>
-                </div>
+            <div class="card">
+                <i class="fas fa-users"></i>
+                <h3>Communauté Engagée</h3>
+                <p>Interagissez facilement avec vos participants. Envoyez des invitations, suivez les réponses et communiquez en temps réel.</p>
             </div>
-        </section>
-    </main>
+            <div class="card">
+                <i class="fas fa-share-alt"></i>
+                <h3>Partage Facile</h3>
+                <p>Partagez vos événements avec votre réseau. Augmentez la portée de vos invitations et assurez-vous que personne ne manque vos événements.</p>
+            </div>
+        </div>
+    </section>
+</main>
 <footer>
         <div class="container">
             <div class="footer-content">
@@ -66,5 +66,29 @@
         </div>
 </footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const ctaButton = document.querySelector('.cta-button');
+        ctaButton.addEventListener('mouseover', function() {
+            this.style.transform = 'scale(1.1)';
+        });
+        ctaButton.addEventListener('mouseout', function() {
+            this.style.transform = 'scale(1)';
+        });
+
+        const cards = document.querySelectorAll('.features .card');
+        cards.forEach(card => {
+            card.addEventListener('mouseover', function() {
+                this.style.transform = 'translateY(-10px)';
+                this.style.boxShadow = '0 8px 15px rgba(0, 0, 0, 0.3)';
+            });
+            card.addEventListener('mouseout', function() {
+                this.style.transform = 'translateY(0)';
+                this.style.boxShadow = '0 4px 10px rgba(0, 0, 0, 0.15)';
+            });
+        });
+    });
+</script>
+</script>
 </body>
 </html>
