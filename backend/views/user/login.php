@@ -78,7 +78,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <header>
         <div class="container">
             <div class="logo">
-                <h1>AppEvent</h1>
+                <h1>EventPulse</h1>
             </div>
             <nav>
                 <ul>

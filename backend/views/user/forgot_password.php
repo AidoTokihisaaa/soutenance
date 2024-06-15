@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Validation de l'email
     if (empty(trim($_POST["email"]))) {
@@ -9,10 +10,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         // Traitement de la réinitialisation du mot de passe
         $email = trim($_POST["email"]);
-        // Ici, vous devez ajouter le code pour envoyer l'e-mail de réinitialisation
-        // et stocker le token de réinitialisation dans votre base de données
-        $_SESSION['message'] = "Un e-mail de réinitialisation a été envoyé à $email.";
-        header("location: forgot_password.php");
+        // Redirection vers le script de traitement
+        header("Location: process_forgot_password.php?email=" . urlencode($email));
         exit;
     }
 }

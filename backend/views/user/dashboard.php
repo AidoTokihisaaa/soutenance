@@ -2,6 +2,7 @@
 session_start();
 date_default_timezone_set('Europe/Paris');
 require_once "../../config/database.php";
+require_once "../../functions/event_functions.php";  // Assurez-vous que le chemin d'accès est correct
 $database = new Database();
 $link = $database->getConnection();
 
@@ -17,26 +18,7 @@ function getUserInfo($link, $userId) {
     return $stmt->fetch(PDO::FETCH_ASSOC);
 }
 
-function getUpcomingEvents($link, $userId) {
-    $stmt = $link->prepare('SELECT id, name, date, description, created_at, updated_at FROM events WHERE user_id = ? AND date >= CURDATE() ORDER BY date ASC');
-    $stmt->bindParam(1, $userId, PDO::PARAM_INT);
-    $stmt->execute();
-    return $stmt->fetchAll(PDO::FETCH_OBJ);
-}
-
-function getUnreadNotifications($link, $userId) {
-    $stmt = $link->prepare('SELECT message, created_at FROM notifications WHERE user_id = ? AND is_read = 0 ORDER BY created_at DESC');
-    $stmt->bindParam(1, $userId, PDO::PARAM_INT);
-    $stmt->execute();
-    return $stmt->fetchAll(PDO::FETCH_OBJ);
-}
-
-function markNotificationsAsRead($link, $userId) {
-    $stmt = $link->prepare('UPDATE notifications SET is_read = 1 WHERE user_id = ? AND is_read = 0');
-    $stmt->bindParam(1, $userId, PDO::PARAM_INT);
-    $stmt->execute();
-}
-
+$events = getUserEvents($link, $_SESSION['id']);
 $userInfo = getUserInfo($link, $_SESSION['id']);
 $upcomingEvents = getUpcomingEvents($link, $_SESSION['id']);
 $notifications = getUnreadNotifications($link, $_SESSION['id']);
@@ -47,6 +29,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['mark_read'])) {
     header('Location: dashboard.php');
     exit;
 }
+
+// Eviter les messages directement dans le header, traiter tout avant le début du HTML
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -62,10 +46,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['mark_read'])) {
 <header>
     <div class="container">
         <div class="logo">
-            <h1><i class="fas fa-calendar-alt"></i> AppEvent Dashboard</h1>
+            <h1><i class="fas fa-calendar-alt"></i> EventPulse</h1>
         </div>
         <nav>
             <ul>
+                <li><a href="../../../index.php"><i class="fas fa-home"></i> Accueil</a></li>
                 <li><a href="../event/create.php"><i class="fas fa-plus-circle"></i> Créer un Événement</a></li>
                 <li><a href="../event/manage.php"><i class="fas fa-tasks"></i> Gérer les Événements</a></li>
                 <li><a href="../event/stats.php"><i class="fas fa-chart-line"></i> Statistiques</a></li>
@@ -154,7 +139,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['mark_read'])) {
                 <a href="#"><i class="fab fa-instagram"></i></a>
                 <a href="#"><i class="fab fa-linkedin-in"></i></a>
             </div>
-            <p>&copy; 2024 AppEvent. Tous droits réservés.</p>
+            <p>&copy; 2024 EventPulse. Tous droits réservés.</p>
         </div>
     </div>
 </footer>

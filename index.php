@@ -11,7 +11,7 @@
 <header>
         <div class="container">
             <div class="logo">
-                <h1><i class="fas fa-calendar-check"></i> AppEvent</h1>
+                <h1><i class="fas fa-calendar-check"></i>EventPulse</h1>
             </div>
             <nav>
                 <ul>
@@ -27,8 +27,8 @@
 <main>
     <section class="hero">
         <div class="container">
-            <h2>Bienvenue sur AppEvent</h2>
-            <p>Découvrez une nouvelle façon d'organiser vos événements. Avec AppEvent, tout devient plus simple. Que vous planifiez une petite réunion ou un grand rassemblement, notre plateforme vous accompagne à chaque étape.</p>
+            <h2>Bienvenue sur EventPulse</h2>
+            <p>Découvrez une nouvelle façon d'organiser vos événements. Avec EventPulse, tout devient plus simple. Que vous planifiez une petite réunion ou un grand rassemblement, notre plateforme vous accompagne à chaque étape.</p>
             <a href="backend/views/user/register.php" class="cta-button"><i class="fas fa-play"></i>Rejoignez-nous</a>
         </div>
     </section>
@@ -37,7 +37,7 @@
             <div class="card">
                 <i class="fas fa-calendar-alt"></i>
                 <h3>Organisation Simplifiée</h3>
-                <p>Facilitez la planification et la gestion de vos événements, sans stress ni complications. Avec AppEvent, tout est sous contrôle.</p>
+                <p>Facilitez la planification et la gestion de vos événements, sans stress ni complications. Avec EventPulse, tout est sous contrôle.</p>
             </div>
             <div class="card">
                 <i class="fas fa-users"></i>
@@ -61,34 +61,33 @@
                     <a href="#"><i class="fab fa-instagram"></i></a>
                     <a href="#"><i class="fab fa-linkedin-in"></i></a>
                 </div>
-                <p>&copy; 2024 AppEvent. Tous droits réservés.</p>
+                <p>&copy; 2024 EventPulse. Tous droits réservés.</p>
             </div>
         </div>
 </footer>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
-    <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const ctaButton = document.querySelector('.cta-button');
-        ctaButton.addEventListener('mouseover', function() {
-            this.style.transform = 'scale(1.1)';
-        });
-        ctaButton.addEventListener('mouseout', function() {
-            this.style.transform = 'scale(1)';
-        });
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+<script>
+        document.addEventListener("DOMContentLoaded", function() {
+    const ctaButton = document.querySelector('.cta-button');
+    ctaButton.addEventListener('mouseover', function() {
+        this.style.transform = 'scale(1.1)';
+    });
+    ctaButton.addEventListener('mouseout', function() {
+        this.style.transform = 'scale(1)';
+    });
 
-        const cards = document.querySelectorAll('.features .card');
-        cards.forEach(card => {
-            card.addEventListener('mouseover', function() {
-                this.style.transform = 'translateY(-10px)';
-                this.style.boxShadow = '0 8px 15px rgba(0, 0, 0, 0.3)';
-            });
-            card.addEventListener('mouseout', function() {
-                this.style.transform = 'translateY(0)';
-                this.style.boxShadow = '0 4px 10px rgba(0, 0, 0, 0.15)';
-            });
+    const cards = document.querySelectorAll('.features .card');
+    cards.forEach(card => {
+        card.addEventListener('mouseover', function() {
+            this.style.transform = 'translateY(-10px)';
+            this.style.boxShadow = '0 20px 40px rgba(0, 0, 0, 0.3)';
+        });
+        card.addEventListener('mouseout', function() {
+            this.style.transform = 'translateY(0)';
+            this.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.1)';
         });
     });
-</script>
+});
 </script>
 </body>
 </html>

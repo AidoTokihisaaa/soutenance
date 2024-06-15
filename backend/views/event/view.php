@@ -2,6 +2,8 @@
 session_start();
 date_default_timezone_set('Europe/Paris');
 require_once "../../config/database.php";
+require_once "../../functions/event_functions.php";  // Corrected the path
+
 $database = new Database();
 $link = $database->getConnection();
 
@@ -10,60 +12,18 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     exit;
 }
 
-if (!isset($_GET['id'])) {
+$eventId = $_GET['id'] ?? null;
+if (!$eventId) {
     echo "Événement non trouvé.";
     exit;
 }
 
-$eventId = intval($_GET['id']);
-
-function getEventDetails($link, $eventId) {
-    $stmt = $link->prepare('SELECT * FROM events WHERE id = ?');
-    $stmt->bindParam(1, $eventId, PDO::PARAM_INT);
-    $stmt->execute();
-    return $stmt->fetch(PDO::FETCH_ASSOC);
-}
-
-function getEventRating($link, $eventId) {
-    $stmt = $link->prepare('SELECT AVG(rating) as average_rating FROM event_ratings WHERE event_id = ?');
-    $stmt->bindParam(1, $eventId, PDO::PARAM_INT);
-    $stmt->execute();
-    $result = $stmt->fetch(PDO::FETCH_ASSOC);
-    return $result['average_rating'];
-}
-
-function getEventComments($link, $eventId) {
-    $stmt = $link->prepare('SELECT c.comment, c.created_at, u.username FROM event_comments c JOIN users u ON c.user_id = u.id WHERE c.event_id = ? ORDER BY c.created_at DESC');
-    $stmt->bindParam(1, $eventId, PDO::PARAM_INT);
-    $stmt->execute();
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
-}
-
+// Utilizing functions defined in event_functions.php
 $eventDetails = getEventDetails($link, $eventId);
 $eventRating = getEventRating($link, $eventId);
-$eventComments = getEventComments($link, $eventId);
+$eventComments = getEventcomments($link, $eventId);
+$allEvents = getUserEvents($link, $_SESSION['id']); // Retrieve all accessible events
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['rating'])) {
-        $rating = intval($_POST['rating']);
-        $stmt = $link->prepare('INSERT INTO event_ratings (event_id, user_id, rating) VALUES (?, ?, ?)');
-        $stmt->bindParam(1, $eventId, PDO::PARAM_INT);
-        $stmt->bindParam(2, $_SESSION['id'], PDO::PARAM_INT);
-        $stmt->bindParam(3, $rating, PDO::PARAM_INT);
-        $stmt->execute();
-        header("Location: view.php?id=$eventId");
-        exit;
-    } elseif (isset($_POST['comment'])) {
-        $comment = htmlspecialchars($_POST['comment']);
-        $stmt = $link->prepare('INSERT INTO event_comments (event_id, user_id, comment) VALUES (?, ?, ?)');
-        $stmt->bindParam(1, $eventId, PDO::PARAM_INT);
-        $stmt->bindParam(2, $_SESSION['id'], PDO::PARAM_INT);
-        $stmt->bindParam(3, $comment, PDO::PARAM_STR);
-        $stmt->execute();
-        header("Location: view.php?id=$eventId");
-        exit;
-    }
-}
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -71,7 +31,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Détails de l'événement</title>
-    <link rel="stylesheet" href="../../../css/dashboard.css">
+    <link rel="stylesheet" href="../../../css/view.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
 </head>
 <body>
 <header>
@@ -100,37 +61,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 </header>
 <main>
-    <div class="container">
+    <div class="container event-details">
         <h2>Détails de l'événement</h2>
-        <p><strong>Nom:</strong> <?= htmlspecialchars($eventDetails['name']) ?></p>
-        <p><strong>Description:</strong> <?= htmlspecialchars($eventDetails['description']) ?></p>
-        <p><strong>Date:</strong> <?= htmlspecialchars($eventDetails['date']) ?></p>
-        <p><strong>Lieu:</strong> <?= htmlspecialchars($eventDetails['location']) ?></p>
-        <p><strong>Note moyenne:</strong> <?= is_null($eventRating) ? 'Pas encore de notes' : number_format($eventRating, 1) ?>/5</p>
+        <div class="event-info">
+            <p><strong>Nom:</strong> <?= htmlspecialchars($eventDetails['name']) ?></p>
+            <p><strong>Description:</strong> <?= htmlspecialchars($eventDetails['description']) ?></p>
+            <p><strong>Date:</strong> <?= htmlspecialchars($eventDetails['date']) ?></p>
+            <p><strong>Lieu:</strong> <?= htmlspecialchars($eventDetails['location']) ?></p>
+            <p><strong>Note moyenne:</strong> <?= is_null($eventRating) ? 'Pas encore de notes' : number_format($eventRating, 1) ?>/5</p>
+        </div>
         
         <h3>Noter cet événement</h3>
-        <form method="post">
+        <form class="rating-form" method="post">
             <label for="rating">Votre note (0-5):</label>
             <input type="number" id="rating" name="rating" min="0" max="5" step="1" required>
-            <button type="submit">Envoyer la note</button>
+            <button type="submit" class="btn">Envoyer la note</button>
         </form>
         
         <h3>Ajouter un commentaire</h3>
-        <form method="post">
+        <form class="comment-form" method="post">
             <label for="comment">Votre commentaire:</label>
             <textarea id="comment" name="comment" required></textarea>
-            <button type="submit">Envoyer le commentaire</button>
+            <button type="submit" class="btn">Envoyer le commentaire</button>
         </form>
-        
-        <h3>Commentaires</h3>
-        <ul>
-            <?php foreach ($eventComments as $comment): ?>
-                <li>
-                    <p><strong><?= htmlspecialchars($comment['username']) ?></strong> <em>(<?= htmlspecialchars($comment['created_at']) ?>)</em></p>
-                    <p><?= htmlspecialchars($comment['comment']) ?></p>
-                </li>
-            <?php endforeach; ?>
-        </ul>
+        <div class="comments">
+            <ul>
+                <?php foreach ($eventComments as $comment): ?>
+                    <li>
+                        <p><strong><?= htmlspecialchars($comment['username']) ?></strong> <em>(<?= htmlspecialchars($comment['created_at']) ?>)</em></p>
+                        <p><?= htmlspecialchars($comment['comment']) ?></p>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
     </div>
 </main>
 <footer>

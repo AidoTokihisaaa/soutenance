@@ -81,7 +81,7 @@ $unreadCount = count($unreadNotifications);
 <header>
     <div class="container">
         <div class="logo">
-            <h1><i class="fas fa-calendar-alt"></i> Dashboard</h1>
+            <h1><i class="fas fa-calendar-alt"></i>EventPulse</h1>
         </div>
         <nav>
             <ul>
@@ -181,7 +181,7 @@ $unreadCount = count($unreadNotifications);
                 <a href="#"><i class="fab fa-instagram"></i></a>
                 <a href="#"><i class="fab fa-linkedin-in"></i></a>
             </div>
-            <p>&copy; 2024 AppEvent. Tous droits réservés.</p>
+            <p>&copy; 2024 EventPulse. Tous droits réservés.</p>
         </div>
     </div>
 </footer>

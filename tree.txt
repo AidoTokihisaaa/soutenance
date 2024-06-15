@@ -18,8 +18,6 @@ C:.
 |   webpack.config.js
 |   
 +---backend
-|   |   index.php
-|   |   
 |   +---config
 |   |       database.php
 |   |       
@@ -27,15 +25,24 @@ C:.
 |   |       EventController.php
 |   |       UserController.php
 |   |       
+|   +---handlers
+|   |       comments.php
+|   |       ratings.php
+|   |       
 |   +---models
 |   |       Event.php
 |   |       User.php
+|   |       
+|   +---partials
+|   |       footer.php
+|   |       header.php
 |   |       
 |   \---views
 |       +---event
 |       |       create.php
 |       |       edit.php
 |       |       manage.php
+|       |       view.php
 |       |       
 |       \---user
 |               dashboard.php

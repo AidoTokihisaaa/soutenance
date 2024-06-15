@@ -10,65 +10,52 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     exit;
 }
 
-function addNotification($link, $userId, $message) {
-    $stmt = $link->prepare("INSERT INTO notifications (user_id, message) VALUES (:user_id, :message)");
-    $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
-    $stmt->bindParam(':message', $message, PDO::PARAM_STR);
-    $stmt->execute();
-}
+// Retrieve all users for permission setting form
+$stmt = $link->prepare("SELECT id, username FROM users");
+$stmt->execute();
+$users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-function getUnreadNotifications($link, $userId) {
-    $stmt = $link->prepare('SELECT message, created_at FROM notifications WHERE user_id = ? AND is_read = 0 ORDER BY created_at DESC');
-    $stmt->bindParam(1, $userId, PDO::PARAM_INT);
-    $stmt->execute();
-    return $stmt->fetchAll(PDO::FETCH_OBJ);
-}
-
-function getUnreadNotificationCount($link, $userId) {
-    $stmt = $link->prepare("SELECT COUNT(*) FROM notifications WHERE user_id = :user_id AND is_read = 0");
-    $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
-    $stmt->execute();
-    return $stmt->fetchColumn();
-}
-
-function markNotificationsAsRead($link, $userId) {
-    $stmt = $link->prepare('UPDATE notifications SET is_read = 1 WHERE user_id = ? AND is_read = 0');
-    $stmt->bindParam(1, $userId, PDO::PARAM_INT);
-    $stmt->execute();
-}
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['mark_read'])) {
-    markNotificationsAsRead($link, $_SESSION['id']);
-    header('Location: create.php');
-    exit;
-}
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['mark_read'])) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $title = $_POST['title'] ?? '';
     $description = $_POST['description'] ?? '';
     $date = $_POST['date'] ?? '';
 
     if (!$title || !$description || !$date) {
         $_SESSION['error'] = "Tous les champs sont requis.";
+        header('Location: create.php');
+        exit;
     } else {
         $stmt = $link->prepare("INSERT INTO events (name, description, date, user_id, created_at, updated_at) VALUES (:name, :description, :date, :user_id, NOW(), NOW())");
         $stmt->bindParam(':name', $title);
         $stmt->bindParam(':description', $description);
+        $vehicle_type = 'date';
         $stmt->bindParam(':date', $date);
         $stmt->bindParam(':user_id', $_SESSION['id']);
         if ($stmt->execute()) {
+            $eventId = $link->lastInsertId();
+
+            foreach ($_POST['users'] as $userId => $permissions) {
+                $can_edit = isset($permissions['can_edit']) ? 1 : 0;
+                $can_comment = isset($permissions['can_comment']) ? 1 : 0;
+                $can_rate = isset($permissions['can_rate']) ? 1 : 0;
+                $stmt = $link->prepare("INSERT INTO event_permissions (event_id, user_id, can_edit, can_comment, can_rate) VALUES (:event_id, :user_id, :can_edit, :can_comment, :can_rate) ON DUPLICATE KEY UPDATE can_edit = :can_edit, can_comment = :can_comment, can_rate = :can_rate");
+                $stmt->bindParam(':event_id', $eventId);
+                $stmt->bindParam(':user_id', $userId);
+                $stmt->bindParam(':can_edit', $can_edit, PDO::PARAM_INT);
+                $stmt->bindParam(':can_comment', $can_comment, PDO::PARAM_INT);
+                $stmt->bindParam(':can_rate', $can_rate, PDO::PARAM_INT); // Corrected to use a constant
+                $stmt->execute();
+            }
             $_SESSION['success'] = "Événement créé avec succès.";
-            addNotification($link, $_SESSION['id'], "Événement créé avec succès.");
             header('Location: manage.php');
             exit;
         } else {
             $_SESSION['error'] = "Erreur lors de la création de l'événement.";
+            header('Location: create.php');
+            exit;
         }
     }
 }
-
-$unreadNotifications = getUnreadNotifications($link, $_SESSION['id']);
-$unreadCount = count($unreadNotifications);
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -77,13 +64,13 @@ $unreadCount = count($unreadNotifications);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Créer un Événement</title>
     <link rel="stylesheet" href="../../../css/create.css">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
 <header>
     <div class="container">
         <div class="logo">
-            <h1><i class="fas fa-calendar-alt"></i> Dashboard</h1>
+            <h1><i class="fas fa-calendar-alt"></i> EventPulse</h1>
         </div>
         <nav>
             <ul>
@@ -101,64 +88,46 @@ $unreadCount = count($unreadNotifications);
                         <a href="../user/logout.php" class="logout"><i class="fas fa-sign-out-alt"></i> Déconnexion</a>
                     </div>
                 </li>
-                <li class="notification-menu">
-                    <a href="#" id="notification-icon">
-                        <i class="fas fa-bell"></i>
-                        <?php if ($unreadCount > 0): ?>
-                            <span class="notification-count"><?= $unreadCount ?></span>
-                        <?php endif; ?>
-                    </a>
-                    <div class="dropdown-content notifications">
-                        <h3>Notifications</h3>
-                        <ul id="notification-list">
-                            <?php if (empty($unreadNotifications)): ?>
-                                <li><i class="fas fa-info-circle"></i> Aucune nouvelle notification pour le moment.</li>
-                            <?php else: ?>
-                                <?php foreach ($unreadNotifications as $notification): ?>
-                                    <li>
-                                        <i class="fas fa-info-circle"></i>
-                                        <?= htmlspecialchars($notification->message) ?>
-                                        <br>
-                                        <small><?= htmlspecialchars(date('d-m-Y H:i:s', strtotime($notification->created_at))) ?></small>
-                                    </li>
-                                <?php endforeach; ?>
-                            <?php endif; ?>
-                        </ul>
-                        <?php if ($unreadCount > 0): ?>
-                            <form method="post" style="text-align: center;">
-                                <input type="hidden" name="mark_read" value="1">
-                                <button type="submit" class="btn">Marquer comme lu</button>
-                            </form>
-                        <?php endif; ?>
-                    </div>
-                </li>
             </ul>
         </nav>
     </div>
 </header>
-<div class="event-form-container">
-    <h1>Créer un Événement</h1>
-    <?php if (isset($_SESSION['error'])): ?>
-        <div class="alert alert-danger">
-            <?php echo $_SESSION['error']; unset($_SESSION['error']); ?>
-        </div>
-    <?php endif; ?>
-    <form action="" method="post">
-        <div class="form-group">
-            <label for="title">Titre de l'événement:</label>
-            <input type="text" id="title" name="title" required>
-        </div>
-        <div class="form-group">
-            <label for="description">Description:</label>
-            <textarea id="description" name="description" required></textarea>
-        </div>
-        <div class="form-group">
-            <label for="date">Date:</label>
-            <input type="date" id="date" name="date" required>
-        </div>
-        <button type="submit" class="btn">Créer l'événement</button>
-    </form>
-</div>
+<main>
+    <div class="event-form-container">
+        <h1>Créer un Événement</h1>
+        <?php if (isset($_SESSION['error'])): ?>
+            <div class="alert alert-danger">
+                <?= $_SESSION['error']; unset($_SESSION['error']); ?>
+            </div>
+        <?php endif; ?>
+        <form action="" method="post">
+            <div class="form-group">
+                <label for="title">Titre de l'événement:</label>
+                <input type="text" id="title" name="title" required>
+            </div>
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <textarea id="description" name="description" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="date">Date:</label>
+                <input type="date" id="date" name="date" required>
+            </div>
+            <div class="permissions-container">
+                <h2>Permissions pour d'autres utilisateurs</h2>
+                <?php foreach ($users as $user): ?>
+                    <div class="form-group">
+                        <label><?= htmlspecialchars($user['username']); ?></label>
+                        <input type="checkbox" name="users[<?= $user['id']; ?>][can_edit]" value="1"> Modifier
+                        <input type="checkbox" name="users[<?= $user['id']; ?>][can_comment]" value="1"> Commenter
+                        <input type="checkbox" name="users[<?= $user['id']; ?>][can_rate]" value="1"> Noter
+                    </div>
+                <?php endforeach; ?>
+            </div>
+            <button type="submit" class="btn">Créer l'événement</button>
+        </form>
+    </div>
+</main>
 <footer>
     <div class="container">
         <div class="footer-content">
@@ -168,7 +137,7 @@ $unreadCount = count($unreadNotifications);
                 <a href="#"><i class="fab fa-instagram"></i></a>
                 <a href="#"><i class="fab fa-linkedin-in"></i></a>
             </div>
-            <p>&copy; 2024 AppEvent. Tous droits réservés.</p>
+            <p>&copy; 2024 EventPulse. Tous droits réservés.</p>
         </div>
     </div>
 </footer>
@@ -176,17 +145,10 @@ $unreadCount = count($unreadNotifications);
 document.addEventListener("DOMContentLoaded", function() {
     const userIcon = document.getElementById('user-icon');
     const dropdown = document.querySelector('.dropdown-content');
-    const notificationIcon = document.getElementById('notification-icon');
-    const notificationDropdown = document.querySelector('.notifications');
 
     userIcon.addEventListener('click', function(event) {
         event.preventDefault();
         dropdown.classList.toggle('show');
-    });
-
-    notificationIcon.addEventListener('click', function(event) {
-        event.preventDefault();
-        notificationDropdown.classList.toggle('show');
     });
 
     window.onclick = function(event) {
@@ -195,12 +157,15 @@ document.addEventListener("DOMContentLoaded", function() {
                 dropdown.classList.remove('show');
             }
         }
-        if (!event.target.matches('#notification-icon') && !notificationDropdown.contains(event.target)) {
-            if (notificationDropdown.classList.contains('show')) {
-                notificationDropdown.classList.remove('show');
-            }
-        }
     };
+
+    const formGroups = document.querySelectorAll('.form-group');
+    formGroups.forEach((group, index) => {
+        group.style.animationDelay = `${index * 0.1}s`;
+    });
+
+    const submitButton = document.querySelector('.btn');
+    submitButton.style.animationDelay = `${formGroups.length * 0.1}s`;
 });
 </script>
 </body>

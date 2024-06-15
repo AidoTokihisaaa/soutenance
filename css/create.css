@@ -1,4 +1,3 @@
-@charset "UTF-8";
 @import 'normalize.css';
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css");
@@ -24,10 +23,10 @@ header {
   color: white;
   padding: 1rem 0;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
-  position: sticky;
+  position: fixed;
   top: 0;
-  z-index: 1000;
   width: 100%;
+  z-index: 1000;
 }
 
 header .container {
@@ -39,11 +38,11 @@ header .container {
 header .logo {
   display: flex;
   align-items: center;
-  margin-right: auto; /* Pousse la nav vers le centre */
+  margin-right: auto;
 }
 
 header .logo h1 {
-  font-size: 1.2rem; /* Taille uniforme */
+  font-size: 1.5rem;
   font-weight: bold;
   display: flex;
   align-items: center;
@@ -51,13 +50,13 @@ header .logo h1 {
 
 header .logo i {
   margin-right: 8px;
-  font-size: 1.2rem; /* Taille uniforme */
+  font-size: 1.5rem;
 }
 
 nav {
   flex-grow: 1;
   display: flex;
-  justify-content: center; /* Centre la nav */
+  justify-content: center;
 }
 
 nav ul {
@@ -76,17 +75,17 @@ nav ul li a {
   color: white;
   text-decoration: none;
   font-weight: 600;
-  padding: 0.4rem 0.8rem; /* Uniform padding */
+  padding: 0.4rem 0.8rem;
   border-radius: 5px;
   transition: background 0.3s, box-shadow 0.3s;
   display: flex;
   align-items: center;
-  font-size: 0.9rem; /* Taille uniforme du texte */
+  font-size: 0.9rem;
 }
 
 nav ul li a i {
   margin-right: 5px;
-  font-size: 0.9rem; /* Taille uniforme des icônes */
+  font-size: 0.9rem;
 }
 
 nav ul li a:hover {
@@ -96,16 +95,16 @@ nav ul li a:hover {
 
 main {
   flex: 1;
-  padding: 3rem 0; /* Augmentation de la marge pour éviter le chevauchement */
+  padding: 100px 0; /* Adjusted to ensure content is below the fixed header */
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  min-height: calc(100vh - 120px); /* Ajouter un calcul pour l'espace du header/footer */
+  min-height: calc(100vh - 120px);
 }
 
 .dashboard-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* 2 colonnes */
+  grid-template-columns: repeat(2, 1fr);
   gap: 20px;
   width: 100%;
 }
@@ -137,56 +136,56 @@ main {
 nav ul li .dropdown-content {
   display: none;
   position: absolute;
-  background-color: white; /* Arrière-plan blanc */
-  color: #34495e; /* Texte en bleu */
-  min-width: 250px; /* Augmentation de la largeur minimale */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre plus subtile */
+  background-color: white;
+  color: #34495e;
+  min-width: 250px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   z-index: 1;
   right: 0;
-  border-radius: 10px; /* Bordures arrondies */
+  border-radius: 10px;
   overflow: hidden;
-  padding: 20px; /* Plus de padding */
-  transition: all 0.3s ease; /* Transition douce */
+  padding: 20px;
+  transition: all 0.3s ease;
 }
 
 nav ul li .dropdown-content .user-info {
-  background-color: white; /* Fond blanc */
-  color: #34495e; /* Texte en bleu */
-  padding: 10px 15px; /* Plus de padding */
-  border-radius: 10px; /* Bordures arrondies */
+  background-color: white;
+  color: #34495e;
+  padding: 10px 15px;
+  border-radius: 10px;
   margin-bottom: 10px;
   text-align: left;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombre légère */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 nav ul li .dropdown-content p,
 nav ul li .dropdown-content a {
-  color: #34495e; /* Texte en bleu */
-  padding: 10px 15px; /* Plus de padding */
+  color: #34495e;
+  padding: 10px 15px;
   text-decoration: none;
   display: block;
-  transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease; /* Transition douce */
-  border-radius: 10px; /* Bordures arrondies pour les éléments de survol */
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+  border-radius: 10px;
 }
 
 nav ul li .dropdown-content p:hover,
 nav ul li .dropdown-content a:hover {
-  background-color: #2980b9; /* Couleur de survol */
-  color: white; /* Texte blanc sur fond bleu */
-  transform: scale(1.05); /* Légère augmentation de l'échelle */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre lors du survol */
+  background-color: #2980b9;
+  color: white;
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 nav ul li .dropdown-content.show {
   display: block;
   opacity: 1;
-  transform: translateY(0); /* Position par défaut */
+  transform: translateY(0);
 }
 
 nav ul li .dropdown-content.hidden {
   opacity: 0;
-  transform: translateY(-10px); /* Légère translation vers le haut */
-  pointer-events: none; /* Désactive les événements */
+  transform: translateY(-10px);
+  pointer-events: none;
 }
 
 .card ul li {
@@ -224,6 +223,156 @@ nav ul li .dropdown-content.hidden {
   transform: scale(1.05);
 }
 
+.form-group {
+  margin-bottom: 20px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.5s ease-in-out forwards;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 600;
+  color: #35495e;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #34495e;
+  border-radius: 10px;
+  font-size: 1rem;
+  color: #35495e;
+  background: white;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #2980b9;
+  box-shadow: 0 0 10px rgba(41, 128, 185, 0.2);
+  outline: none;
+}
+
+.permissions-container {
+  margin-top: 20px;
+  background: #f8f9fa;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.permissions-container h2 {
+  font-size: 1.5rem;
+  color: #34495e;
+  margin-bottom: 15px;
+  text-align: center;
+  font-weight: bold;
+  border-bottom: 2px solid #34495e;
+  padding-bottom: 10px;
+}
+
+.permissions-container .form-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  padding: 10px 0;
+  border-bottom: 1px solid #ddd;
+  justify-content: space-between;
+}
+
+.permissions-container .form-group:last-child {
+  border-bottom: none;
+}
+
+.permissions-container .form-group label {
+  flex: 1;
+  font-size: 1rem;
+  color: #35495e;
+  margin-right: 20px;
+  font-weight: 500;
+}
+
+.permissions-container .form-group input[type=checkbox] {
+  margin-right: 15px;
+  transform: scale(1.2);
+  accent-color: #34495e;
+  cursor: pointer;
+}
+
+.permissions-container .form-group input[type=checkbox]:hover {
+  filter: brightness(0.9);
+}
+
+.event-form-container {
+  background: white;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  max-width: 800px;
+  width: 100%;
+  margin-bottom: 100px; /* Ensure footer doesn't overlap */
+  animation: fadeIn 0.5s ease-in-out forwards;
+}
+
+.event-form-container h1 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 2rem;
+  color: #34495e;
+  animation: fadeInUp 0.5s ease-in-out forwards;
+}
+
+.alert {
+  background: #e74c3c;
+  color: white;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  animation: fadeInUp 0.5s ease-in-out forwards;
+}
+
+.btn {
+  display: block;
+  width: 100%;
+  background: #34495e;
+  color: white;
+  padding: 15px;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 20px;
+  transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+
+.btn:hover {
+  background: #2980b9;
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 footer {
   background-color: #2c3e50;
   color: white;
@@ -231,10 +380,8 @@ footer {
   padding: 1rem 0;
   width: 100%;
   border-top: 5px solid #1a252f;
-  position: fixed;
+  position: relative;
   bottom: 0;
-  left: 0;
-  right: 0;
 }
 
 footer .footer-content {
@@ -254,101 +401,6 @@ footer .social-media a:hover {
   color: #1a252f;
 }
 
-/* Styles pour le menu de notification */
-.notification-menu {
-  position: relative;
-}
-
-.notification-menu #notification-icon {
-  color: white;
-  font-size: 1.5rem;
-  cursor: pointer;
-  position: relative;
-}
-
-.notification-menu #notification-icon .notification-count {
-  position: absolute;
-  top: -5px;
-  right: -5px;
-  background-color: #e74c3c;
-  color: white;
-  border-radius: 50%;
-  padding: 2px 6px;
-  font-size: 0.75rem;
-}
-
-.notification-menu .notifications {
-  display: none;
-  position: absolute;
-  top: 100%;
-  right: 0;
-  background-color: white;
-  color: #34495e;
-  min-width: 250px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  z-index: 1;
-  border-radius: 10px;
-  padding: 20px;
-  transition: all 0.3s ease;
-}
-
-.notification-menu .notifications h3 {
-  margin-top: 0;
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: #34495e;
-  border-bottom: 1px solid #34495e;
-  padding-bottom: 10px;
-}
-
-.notification-menu .notifications ul {
-  list-style: none;
-  padding: 0;
-  margin: 10px 0;
-}
-
-.notification-menu .notifications ul li {
-  padding: 10px;
-  border-bottom: 1px solid #f0f0f0;
-  display: flex;
-  align-items: center;
-}
-
-.notification-menu .notifications ul li i {
-  margin-right: 10px;
-  color: #34495e;
-}
-
-.notification-menu .notifications ul li small {
-  color: #35495e;
-  margin-left: auto;
-  font-size: 0.75rem;
-}
-
-.notification-menu .notifications.show {
-  display: block;
-}
-
-.notification-menu .btn {
-  display: block;
-  width: 100%;
-  background-color: #34495e;
-  color: #fff;
-  border: none;
-  padding: 12px 20px;
-  font-size: 16px;
-  font-weight: 600;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background 0.3s;
-  text-transform: uppercase;
-  margin-top: 10px;
-}
-
-.notification-menu .btn:hover {
-  background-color: #22303d;
-}
-
 @media (max-width: 768px) {
   nav ul {
     flex-direction: column;
@@ -357,7 +409,7 @@ footer .social-media a:hover {
     margin: 10px 0;
   }
   .dashboard-grid {
-    grid-template-columns: 1fr; /* Une seule colonne sur petits écrans */
+    grid-template-columns: 1fr;
   }
   footer .footer-content {
     flex-direction: column;

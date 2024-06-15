@@ -1,6 +1,8 @@
 <?php
 session_start();
 require_once "../../config/database.php";
+require_once "../../functions/event_functions.php";
+
 $database = new Database();
 $link = $database->getConnection();
 
@@ -14,11 +16,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_rating'])) {
     $stmt->bindParam(2, $userId, PDO::PARAM_INT);
     $stmt->bindParam(3, $rating, PDO::PARAM_INT);
     if ($stmt->execute()) {
+        addNotification($link, $userId, "Nouvelle note ajoutée à l'événement.");
         $_SESSION['success'] = "Note ajoutée avec succès.";
+        header("Location: /views/event/view.php?id=$eventId");
+        exit;
     } else {
         $_SESSION['error'] = "Erreur lors de l'ajout de la note.";
+        header("Location: /views/event/view.php?id=$eventId");
+        exit;
     }
-    header("Location: /views/event/view.php?id=$eventId");
-    exit;
 }
 ?>
