@@ -1,4 +1,3 @@
-
 # EventPulse
 
 EventPulse est une application web de gestion d'événements, permettant aux utilisateurs de créer, gérer et participer à divers événements. Cette application offre des fonctionnalités de création d'événements, de gestion des participants, de notifications, et bien plus encore.
@@ -26,11 +25,11 @@ Avant de commencer, assurez-vous d'avoir les logiciels suivants installés sur v
 
 1. Clonez le dépôt de l'application :
    ```bash
-   git clone https://github.com/votre-utilisateur/eventpulse.git
+   git clone https://gitlab.com/soutenance1253225/soutenance.git
    ```
 
 2. Déplacez les fichiers dans le répertoire `www` de WAMP :
-   - Déplacez le dossier cloné dans `C:\wamp64\www\app-event`.
+   - Déplacez le dossier cloné dans `C:\wamp64\www\soutenance`.
 
 3. Installez les dépendances du projet :
    ```bash
@@ -91,7 +90,7 @@ Vérifiez que le fichier `webpack.config.js` est correctement configuré pour le
 ## Utilisation
 
 1. Assurez-vous que WAMP64 est en cours d'exécution.
-2. Ouvrez votre navigateur et accédez à `http://localhost/app-event/backend` pour le backend et à `http://localhost/app-event/frontend` pour le frontend.
+2. Ouvrez votre navigateur et accédez à `http://localhost/soutenance/backend` pour le backend et à `http://localhost/soutenance/frontend` pour le frontend.
 
 ### Compilation et Construction du Projet
 
@@ -179,7 +178,7 @@ Pour importer la base de données, suivez les étapes ci-dessous :
 ### Lancement de l'application
 
 1. Assurez-vous que WAMP64 est en cours d'exécution.
-2. Accédez à `http://localhost/app-event/` dans votre navigateur.
+2. Accédez à `http://localhost/soutenance/` dans votre navigateur.
 
 ### Structure du projet
 
