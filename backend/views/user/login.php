@@ -1,36 +1,47 @@
 <?php
+// Démarrer une session
 session_start();
 
+// Vider la session si elle existe
 if (!empty($_SESSION)) {
     session_destroy();
     session_start();
 }
 
+// Vérifier si l'utilisateur est déjà connecté
 if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
+    // Rediriger vers la page d'accueil s'il est connecté
     header("location: homepage.php");
     exit;
 }
 
+// Inclure le fichier de configuration de la base de données
 require_once "../../config/database.php";
 $database = new Database();
 $link = $database->getConnection();
 
 $username = $password = "";
 $username_err = $password_err = "";
+
+// Vérifier la méthode de la requête
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Vérifier si le nom d'utilisateur est vide
     if (empty(trim($_POST["username"]))) {
         $username_err = "Veuillez entrer votre nom d'utilisateur.";
     } else {
         $username = trim($_POST["username"]);
     }
 
+    // Vérifier si le mot de passe est vide
     if (empty(trim($_POST["password"]))) {
         $password_err = "Veuillez entrer votre mot de passe.";
     } else {
         $password = trim($_POST["password"]);
     }
 
+    // Valider les identifiants
     if (empty($username_err) && empty($password_err)) {
+        // Préparer une requête SQL pour sélectionner l'utilisateur par nom d'utilisateur
         $sql = "SELECT id, username, password FROM users WHERE username = ?";
 
         if ($stmt = $link->prepare($sql)) {
@@ -43,10 +54,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         $username = $row['username'];
                         $hashed_password = $row['password'];
                         if (password_verify($password, $hashed_password)) {
+                            // Démarrer une nouvelle session et stocker les informations de l'utilisateur
                             session_start();
                             $_SESSION["loggedin"] = true;
                             $_SESSION["id"] = $id;
                             $_SESSION["username"] = $username;                            
+                            // Rediriger vers le tableau de bord
                             header("location: dashboard.php");
                         } else {
                             $password_err = "Le mot de passe que vous avez entré n'est pas valide.";
@@ -65,7 +78,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ?>
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -73,7 +85,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="../../../css/auth.scss">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
-
 <body>
     <header>
         <div class="container">
@@ -111,15 +122,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </div>
                     <button type="submit" class="cta-button"><i class="fas fa-sign-in-alt"></i> Se connecter</button>
                 </form>
-                <p class="forgot-password"><a href="../../../backend/views/user/forgot_password.php"><i class="fas fa-unlock-alt"></i> Mot de passe oublié?</a></p>
+                <p class="forgot-password"><a href="../../views/user/forgot_password.php"><i class="fas fa-unlock-alt"></i> Mot de passe oublié?</a></p>
             </div>
         </section>
     </main>
     <footer>
         <div class="container">
-            <p>&copy; 2024 AppEvent. Tous droits réservés.</p>
+            <p>&copy; 2024 EventPulse. Tous droits réservés.</p>
         </div>
     </footer>
 </body>
-
 </html>

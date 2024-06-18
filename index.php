@@ -9,22 +9,25 @@
 </head>
 <body>
 <header>
-        <div class="container">
-            <div class="logo">
-                <h1><i class="fas fa-calendar-check"></i>EventPulse</h1>
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="../../../index.php"><i class="fas fa-home"></i> Accueil</a></li>
-                    <li><a href="backend/views/user/login.php"><i class="fas fa-sign-in-alt"></i> Connexion</a></li>
-                    <li><a href="backend/views/user/register.php"><i class="fas fa-user-plus"></i> Inscription</a></li>
-                    <li><a href="about.php"><i class="fas fa-info-circle"></i> À Propos</a></li>
-                    <li><a href="contact.php"><i class="fas fa-envelope"></i> Contact</a></li>
-                </ul>
-            </nav>
+    <div class="container">
+        <!-- Logo de l'application -->
+        <div class="logo">
+            <h1><i class="fas fa-calendar-check"></i>EventPulse</h1>
         </div>
-    </header>
+        <!-- Navigation principale -->
+        <nav>
+            <ul>
+                <li><a href="../../../index.php"><i class="fas fa-home"></i> Accueil</a></li>
+                <li><a href="backend/views/user/login.php"><i class="fas fa-sign-in-alt"></i> Connexion</a></li>
+                <li><a href="backend/views/user/register.php"><i class="fas fa-user-plus"></i> Inscription</a></li>
+                <li><a href="about.php"><i class="fas fa-info-circle"></i> À Propos</a></li>
+                <li><a href="contact.php"><i class="fas fa-envelope"></i> Contact</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
 <main>
+    <!-- Section principale avec le message de bienvenue -->
     <section class="hero">
         <div class="container">
             <h2>Bienvenue sur EventPulse</h2>
@@ -32,6 +35,7 @@
             <a href="backend/views/user/register.php" class="cta-button"><i class="fas fa-play"></i>Rejoignez-nous</a>
         </div>
     </section>
+    <!-- Section des fonctionnalités de l'application -->
     <section class="features">
         <div class="container">
             <div class="card">
@@ -53,22 +57,25 @@
     </section>
 </main>
 <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="social-media">
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                </div>
-                <p>&copy; 2024 EventPulse. Tous droits réservés.</p>
+    <div class="container">
+        <div class="footer-content">
+            <!-- Liens vers les réseaux sociaux -->
+            <div class="social-media">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
             </div>
+            <p>&copy; 2024 EventPulse. Tous droits réservés.</p>
         </div>
+    </div>
 </footer>
+<!-- Inclusion de FontAwesome pour les icônes -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
 <script>
-        document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function() {
     const ctaButton = document.querySelector('.cta-button');
+    // Animation du bouton CTA au survol
     ctaButton.addEventListener('mouseover', function() {
         this.style.transform = 'scale(1.1)';
     });
@@ -77,6 +84,7 @@
     });
 
     const cards = document.querySelectorAll('.features .card');
+    // Animation des cartes de fonctionnalités au survol
     cards.forEach(card => {
         card.addEventListener('mouseover', function() {
             this.style.transform = 'translateY(-10px)';

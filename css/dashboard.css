@@ -1,387 +1,443 @@
 @charset "UTF-8";
-@import 'normalize.css';
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
-@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css");
+/* Définit l'encodage des caractères pour le fichier CSS */
+/* Importations des fichiers CSS nécessaires */
+@import 'normalize.css'; /* Normalise le style par défaut des navigateurs */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"); /* Importation de la police Poppins */
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"); /* Importation de Font Awesome pour les icônes */
+/* Déclaration des variables de couleurs */
+/* Couleur primaire */
+/* Couleur secondaire */
+/* Dégradé pour le fond */
+/* Couleur du texte */
+/* Couleur de survol */
+/* Couleur pour les alertes */
+/* Couleur pour les messages de danger */
+/* Couleur pour les messages de succès */
+/* Styles globaux pour body et html */
 body, html {
-  height: 100%;
-  margin: 0;
-  font-family: "Poppins", sans-serif;
-  background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
-  color: #35495e;
-  display: flex;
-  flex-direction: column;
+  height: 100%; /* Hauteur de 100% de la fenêtre */
+  margin: 0; /* Supprime les marges */
+  font-family: "Poppins", sans-serif; /* Police de caractères */
+  background: linear-gradient(135deg, #f5f7fa, #c3cfe2); /* Dégradé de fond */
+  color: #35495e; /* Couleur du texte */
+  display: flex; /* Utilise le modèle de boîte flex */
+  flex-direction: column; /* Direction des boîtes flex en colonne */
 }
 
+/* Styles pour le conteneur principal */
 .container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
-  flex: 1;
+  max-width: 1200px; /* Largeur maximale */
+  margin: 0 auto; /* Centre le conteneur horizontalement */
+  padding: 20px; /* Padding interne */
+  flex: 1; /* Flex-grow pour prendre l'espace restant */
 }
 
+/* Styles pour l'en-tête */
 header {
-  background: #2c3e50;
-  color: white;
-  padding: 1rem 0;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
-  position: sticky;
-  top: 0;
-  z-index: 1000;
+  background: #2c3e50; /* Couleur de fond */
+  color: white; /* Couleur du texte */
+  padding: 1rem 0; /* Padding vertical */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25); /* Ombre portée */
+  position: sticky; /* Position fixe en haut */
+  top: 0; /* Fixe en haut */
+  z-index: 1000; /* Au-dessus des autres éléments */
 }
 
 header .container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  display: flex; /* Utilise le modèle de boîte flex */
+  justify-content: space-between; /* Espace entre les éléments */
+  align-items: center; /* Aligne verticalement au centre */
 }
 
 header .logo {
-  display: flex;
-  align-items: center;
+  display: flex; /* Utilise le modèle de boîte flex */
+  align-items: center; /* Aligne verticalement au centre */
   margin-right: auto; /* Pousse la nav vers le centre */
 }
 
 header .logo h1 {
   font-size: 1.2rem; /* Taille uniforme */
-  font-weight: bold;
-  display: flex;
-  align-items: center;
+  font-weight: bold; /* Texte en gras */
+  display: flex; /* Utilise le modèle de boîte flex */
+  align-items: center; /* Aligne verticalement au centre */
 }
 
 header .logo i {
-  margin-right: 8px;
+  margin-right: 8px; /* Marge à droite */
   font-size: 1.2rem; /* Taille uniforme */
 }
 
+/* Styles pour la navigation */
 nav {
-  flex-grow: 1;
-  display: flex;
-  justify-content: center; /* Centre la nav */
+  flex-grow: 1; /* Flex-grow pour prendre l'espace restant */
+  display: flex; /* Utilise le modèle de boîte flex */
+  justify-content: center; /* Centre les éléments */
 }
 
 nav ul {
-  list-style: none;
-  display: flex;
-  padding: 0;
-  margin: 0;
-  align-items: center;
+  list-style: none; /* Supprime les puces de liste */
+  display: flex; /* Utilise le modèle de boîte flex */
+  padding: 0; /* Supprime le padding */
+  margin: 0; /* Supprime la marge */
+  align-items: center; /* Aligne verticalement au centre */
 }
 
 nav ul li {
-  margin: 0 8px;
+  margin: 0 8px; /* Marge horizontale */
 }
 
 nav ul li a {
-  color: white;
-  text-decoration: none;
-  font-weight: 600;
-  padding: 0.4rem 0.8rem; /* Uniform padding */
-  border-radius: 5px;
-  transition: background 0.3s, box-shadow 0.3s;
-  display: flex;
-  align-items: center;
+  color: white; /* Couleur du texte */
+  text-decoration: none; /* Supprime la décoration du texte */
+  font-weight: 600; /* Texte en gras */
+  padding: 0.4rem 0.8rem; /* Padding uniforme */
+  border-radius: 5px; /* Bordures arrondies */
+  transition: background 0.3s, box-shadow 0.3s; /* Transition douce */
+  display: flex; /* Utilise le modèle de boîte flex */
+  align-items: center; /* Aligne verticalement au centre */
   font-size: 0.9rem; /* Taille uniforme du texte */
 }
 
 nav ul li a i {
-  margin-right: 5px;
+  margin-right: 5px; /* Marge à droite */
   font-size: 0.9rem; /* Taille uniforme des icônes */
 }
 
 nav ul li a:hover {
-  background-color: #2980b9;
-  box-shadow: 0 4px 8px rgba(41, 128, 185, 0.5);
+  background-color: #2980b9; /* Couleur de survol */
+  box-shadow: 0 4px 8px rgba(41, 128, 185, 0.5); /* Ombre lors du survol */
 }
 
+/* Styles pour le menu déroulant */
 nav ul li .dropdown-content {
-  display: none;
-  position: absolute;
+  display: none; /* Masque le contenu par défaut */
+  position: absolute; /* Position absolue */
   background-color: white; /* Arrière-plan blanc */
   color: #34495e; /* Texte en bleu */
-  min-width: 250px; /* Augmentation de la largeur minimale */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre plus subtile */
-  z-index: 1;
-  right: 0;
+  min-width: 250px; /* Largeur minimale */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre */
+  z-index: 1; /* Au-dessus des autres éléments */
+  right: 0; /* Aligne à droite */
   border-radius: 10px; /* Bordures arrondies */
-  overflow: hidden;
-  padding: 20px; /* Plus de padding */
+  overflow: hidden; /* Masque le débordement */
+  padding: 20px; /* Padding */
   transition: all 0.3s ease; /* Transition douce */
 }
 
 nav ul li .dropdown-content .user-info {
   background-color: white; /* Fond blanc */
   color: #34495e; /* Texte en bleu */
-  padding: 10px 15px; /* Plus de padding */
+  padding: 10px 15px; /* Padding */
   border-radius: 10px; /* Bordures arrondies */
-  margin-bottom: 10px;
-  text-align: left;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombre légère */
+  margin-bottom: 10px; /* Marge inférieure */
+  text-align: left; /* Aligne le texte à gauche */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombre */
 }
 
 nav ul li .dropdown-content p,
 nav ul li .dropdown-content a {
   color: #34495e; /* Texte en bleu */
-  padding: 10px 15px; /* Plus de padding */
-  text-decoration: none;
-  display: block;
+  padding: 10px 15px; /* Padding */
+  text-decoration: none; /* Supprime la décoration du texte */
+  display: block; /* Affichage en bloc */
   transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease; /* Transition douce */
-  border-radius: 10px; /* Bordures arrondies pour les éléments de survol */
+  border-radius: 10px; /* Bordures arrondies */
 }
 
 nav ul li .dropdown-content p:hover,
 nav ul li .dropdown-content a:hover {
   background-color: #2980b9; /* Couleur de survol */
   color: white; /* Texte blanc sur fond bleu */
-  transform: scale(1.05); /* Légère augmentation de l'échelle */
+  transform: scale(1.05); /* Agrandissement */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre lors du survol */
 }
 
 nav ul li .dropdown-content.show {
-  display: block;
-  opacity: 1;
-  transform: translateY(0); /* Position par défaut */
+  display: block; /* Affiche le contenu */
+  opacity: 1; /* Opacité totale */
+  transform: translateY(0); /* Aucun déplacement vertical */
 }
 
 nav ul li .dropdown-content.hidden {
-  opacity: 0;
-  transform: translateY(-10px); /* Légère translation vers le haut */
+  opacity: 0; /* Opacité nulle */
+  transform: translateY(-10px); /* Déplacement vers le haut */
   pointer-events: none; /* Désactive les événements */
 }
 
+/* Styles pour le contenu principal */
 main {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 2rem 0;
-  background: white;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-  border-radius: 8px;
+  flex: 1; /* Flex-grow pour prendre l'espace restant */
+  display: flex; /* Utilise le modèle de boîte flex */
+  justify-content: center; /* Centre horizontalement */
+  align-items: flex-start; /* Aligne au début verticalement */
+  padding: 2rem 0; /* Padding vertical */
+  background: white; /* Couleur de fond */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Ombre */
+  border-radius: 8px; /* Bordures arrondies */
 }
 
+/* Styles pour l'aperçu du tableau de bord */
 .dashboard-overview {
-  text-align: center;
-  width: 100%;
+  text-align: center; /* Centre le texte */
+  width: 100%; /* Largeur totale */
 }
 
+/* Grille du tableau de bord */
 .dashboard-grid {
-  display: grid;
+  display: grid; /* Utilise le modèle de grille */
   grid-template-columns: 1fr; /* Une seule colonne */
-  gap: 20px;
-  padding: 20px;
+  gap: 20px; /* Espacement entre les éléments */
+  padding: 20px; /* Padding interne */
 }
 
+/* Styles pour les cartes */
 .card {
-  background: white;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-  padding: 20px;
-  text-align: center;
-  transition: transform 0.3s, box-shadow 0.3s;
-  width: 100%;
+  background: white; /* Couleur de fond */
+  border-radius: 10px; /* Bordures arrondies */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Ombre */
+  padding: 20px; /* Padding interne */
+  text-align: center; /* Centre le texte */
+  transition: transform 0.3s, box-shadow 0.3s; /* Transition douce */
+  width: 100%; /* Largeur totale */
 }
 
 .card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+  transform: translateY(-10px); /* Déplacement vertical */
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3); /* Ombre lors du survol */
 }
 
 .card h3 {
-  margin-bottom: 20px;
+  margin-bottom: 20px; /* Marge inférieure */
 }
 
 .card ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+  list-style: none; /* Supprime les puces de liste */
+  padding: 0; /* Supprime le padding */
+  margin: 0; /* Supprime la marge */
 }
 
 .card ul li {
-  background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
-  border: 1px solid #34495e;
-  padding: 20px;
-  border-radius: 5px;
-  margin-bottom: 15px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  transition: background-color 0.3s;
+  background: linear-gradient(135deg, #f5f7fa, #c3cfe2); /* Dégradé de fond */
+  border: 1px solid #34495e; /* Bordure */
+  padding: 20px; /* Padding interne */
+  border-radius: 5px; /* Bordures arrondies */
+  margin-bottom: 15px; /* Marge inférieure */
+  display: flex; /* Utilise le modèle de boîte flex */
+  flex-direction: column; /* Direction des boîtes flex en colonne */
+  align-items: flex-start; /* Aligne les éléments au début */
+  transition: background-color 0.3s; /* Transition douce */
 }
 
 .card ul li:hover {
-  background-color: #587ca0;
+  background-color: #587ca0; /* Couleur de fond éclaircie */
 }
 
 .card ul li i {
-  margin-right: 10px;
+  margin-right: 10px; /* Marge à droite */
 }
 
 .card ul li span {
-  display: block;
-  font-size: 1.1rem;
+  display: block; /* Affichage en bloc */
+  font-size: 1.1rem; /* Taille de la police */
 }
 
 .card ul li p {
-  margin: 5px 0;
-  font-size: 1rem;
+  margin: 5px 0; /* Marge verticale */
+  font-size: 1rem; /* Taille de la police */
 }
 
+/* Styles pour le bouton "Voir les détails" */
 .view-details {
-  background-color: #34495e;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s, transform 0.3s;
-  align-self: flex-end;
-  margin-top: 10px;
+  background-color: #34495e; /* Couleur de fond */
+  color: white; /* Couleur du texte */
+  border: none; /* Supprime la bordure */
+  padding: 10px 15px; /* Padding */
+  border-radius: 5px; /* Bordures arrondies */
+  cursor: pointer; /* Curseur pointeur */
+  transition: background-color 0.3s, transform 0.3s; /* Transition douce */
+  align-self: flex-end; /* Aligne à la fin */
+  margin-top: 10px; /* Marge supérieure */
 }
 
 .view-details:hover {
-  background-color: #22303d;
-  transform: scale(1.05);
+  background-color: #22303d; /* Couleur de fond assombrie */
+  transform: scale(1.05); /* Agrandissement */
 }
 
+/* Styles pour le pied de page */
 footer {
-  background-color: #2c3e50;
-  color: white;
-  text-align: center;
-  padding: 1rem 0;
-  width: 100%;
-  border-top: 5px solid #1a252f;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  background-color: #2c3e50; /* Couleur de fond */
+  color: white; /* Couleur du texte */
+  text-align: center; /* Centre le texte */
+  padding: 1rem 0; /* Padding vertical */
+  width: 100%; /* Largeur totale */
+  border-top: 5px solid #1a252f; /* Bordure supérieure */
+  position: fixed; /* Fixe en bas */
+  bottom: 0; /* En bas */
+  left: 0; /* À gauche */
+  right: 0; /* À droite */
 }
 
 footer .footer-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  display: flex; /* Utilise le modèle de boîte flex */
+  justify-content: space-between; /* Espace entre les éléments */
+  align-items: center; /* Aligne verticalement au centre */
 }
 
 footer .social-media a {
-  color: white;
-  font-size: 1.5rem;
-  margin: 0 10px;
-  transition: color 0.3s;
+  color: white; /* Couleur du texte */
+  font-size: 1.5rem; /* Taille de la police */
+  margin: 0 10px; /* Marge horizontale */
+  transition: color 0.3s; /* Transition douce */
 }
 
 footer .social-media a:hover {
-  color: #1a252f;
+  color: #1a252f; /* Couleur du texte assombrie */
 }
 
-/* notifications.css */
+/* Styles pour le menu de notifications */
 .notification-menu {
-  position: relative;
+  position: relative; /* Position relative */
 }
 
 .notification-count {
-  background-color: #e74c3c;
-  color: white;
-  border-radius: 50%;
-  padding: 2px 6px;
-  font-size: 0.8rem;
-  position: absolute;
-  top: -5px;
-  right: -5px;
+  background-color: #e74c3c; /* Couleur de fond */
+  color: white; /* Couleur du texte */
+  border-radius: 50%; /* Bordures arrondies */
+  padding: 2px 6px; /* Padding */
+  font-size: 0.8rem; /* Taille de la police */
+  position: absolute; /* Position absolue */
+  top: -5px; /* Position en haut */
+  right: -5px; /* Position à droite */
 }
 
+/* Styles pour les notifications */
 .notifications {
-  display: none;
-  position: absolute;
-  background-color: white;
-  color: #34495e;
-  min-width: 250px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  z-index: 1;
-  right: 0;
-  border-radius: 10px;
-  overflow: hidden;
-  padding: 20px;
-  transition: all 0.3s ease;
+  display: none; /* Masque le contenu */
+  position: absolute; /* Position absolue */
+  background-color: white; /* Couleur de fond */
+  color: #34495e; /* Couleur du texte */
+  min-width: 250px; /* Largeur minimale */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre */
+  z-index: 1; /* Au-dessus des autres éléments */
+  right: 0; /* Aligne à droite */
+  border-radius: 10px; /* Bordures arrondies */
+  overflow: hidden; /* Masque le débordement */
+  padding: 20px; /* Padding */
+  transition: all 0.3s ease; /* Transition douce */
 }
 
 .notifications h3 {
-  font-size: 1.2rem;
-  margin-bottom: 10px;
+  font-size: 1.2rem; /* Taille de la police */
+  margin-bottom: 10px; /* Marge inférieure */
 }
 
 .notifications ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+  list-style: none; /* Supprime les puces de liste */
+  padding: 0; /* Supprime le padding */
+  margin: 0; /* Supprime la marge */
 }
 
 .notifications ul li {
-  padding: 10px;
-  border-bottom: 1px solid #ecf0f1;
+  padding: 10px; /* Padding */
+  border-bottom: 1px solid #ecf0f1; /* Bordure inférieure */
 }
 
 .notifications ul li:last-child {
-  border-bottom: none;
+  border-bottom: none; /* Supprime la bordure pour le dernier élément */
 }
 
 .notifications ul li i {
-  margin-right: 10px;
-  color: #2980b9;
+  margin-right: 10px; /* Marge à droite */
+  color: #2980b9; /* Couleur de l'icône */
 }
 
 .notifications ul li small {
-  display: block;
-  color: #7f8c8d;
-  font-size: 0.8rem;
+  display: block; /* Affichage en bloc */
+  color: #7f8c8d; /* Couleur du texte */
+  font-size: 0.8rem; /* Taille de la police */
 }
 
 .notifications.show {
-  display: block;
-  opacity: 1;
-  transform: translateY(0);
+  display: block; /* Affiche le contenu */
+  opacity: 1; /* Opacité totale */
+  transform: translateY(0); /* Position par défaut */
 }
 
 .notifications.hidden {
-  opacity: 0;
-  transform: translateY(-10px);
-  pointer-events: none;
+  opacity: 0; /* Opacité nulle */
+  transform: translateY(-10px); /* Déplacement vers le haut */
+  pointer-events: none; /* Désactive les événements */
 }
 
+/* Grille pour les événements */
+.events-grid {
+  display: grid; /* Utilise le modèle de grille */
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Colonnes automatiques */
+  gap: 20px; /* Espacement entre les éléments */
+  justify-items: center; /* Centre horizontalement */
+  width: 100%; /* Largeur totale */
+}
+
+/* Styles pour les éléments d'événements */
+.event-item {
+  background: white; /* Couleur de fond */
+  border-radius: 10px; /* Bordures arrondies */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Ombre */
+  padding: 20px; /* Padding interne */
+  text-align: center; /* Centre le texte */
+  transition: transform 0.3s, box-shadow 0.3s; /* Transition douce */
+  width: 100%; /* Largeur totale */
+  max-width: 300px; /* Largeur maximale */
+}
+
+.event-item:hover {
+  transform: translateY(-10px); /* Déplacement vertical */
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3); /* Ombre lors du survol */
+}
+
+/* Styles pour les boutons */
 .btn {
-  display: inline-block;
-  background-color: #34495e;
-  color: #fff;
-  border: none;
-  padding: 8px 15px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background 0.3s;
-  margin-top: 10px;
-  text-transform: uppercase;
-  text-align: center;
+  display: inline-block; /* Affichage en ligne */
+  background-color: #34495e; /* Couleur de fond */
+  color: #fff; /* Couleur du texte */
+  border: none; /* Supprime la bordure */
+  padding: 8px 15px; /* Padding */
+  font-size: 0.9rem; /* Taille de la police */
+  font-weight: 600; /* Texte en gras */
+  border-radius: 5px; /* Bordures arrondies */
+  cursor: pointer; /* Curseur pointeur */
+  transition: background 0.3s; /* Transition douce */
+  margin-top: 10px; /* Marge supérieure */
+  text-transform: uppercase; /* Texte en majuscules */
+  text-align: center; /* Centre le texte */
 }
 
 .btn:hover {
-  background-color: #22303d;
+  background-color: #22303d; /* Couleur de fond assombrie */
 }
 
+/* Classe pour centrer le texte */
+.centered {
+  text-align: center; /* Centre le texte */
+}
+
+/* Styles pour les écrans plus petits */
 @media (max-width: 768px) {
   nav ul {
-    flex-direction: column;
+    flex-direction: column; /* Direction des éléments en colonne */
   }
   nav ul li {
-    margin: 10px 0;
+    margin: 10px 0; /* Marge verticale */
   }
   .card {
-    width: 100%;
+    width: 100%; /* Largeur totale */
   }
   footer .footer-content {
-    flex-direction: column;
+    flex-direction: column; /* Direction des éléments en colonne */
   }
   footer .social-media {
-    margin-top: 10px;
+    margin-top: 10px; /* Marge supérieure */
   }
 }
 

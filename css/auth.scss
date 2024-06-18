@@ -1,275 +1,307 @@
 @charset "utf-8";
 
+/* Importation des fichiers CSS nécessaires */
 @import 'node_modules/normalize.css';
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css");
 
+/* Styles de base pour le body et html */
 body, html {
-  height: 100%;
-  margin: 0;
-  font-family: 'Poppins', sans-serif;
-  background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
-  color: #35495e;
-  display: flex;
-  flex-direction: column;
+  height: 100%; /* Hauteur de 100% pour occuper tout l'écran */
+  margin: 0; /* Aucune marge */
+  font-family: 'Poppins', sans-serif; /* Police Poppins */
+  background: linear-gradient(135deg, #f5f7fa, #c3cfe2); /* Dégradé de fond */
+  color: #35495e; /* Couleur du texte */
+  display: flex; /* Affichage flex */
+  flex-direction: column; /* Alignement des enfants en colonne */
 }
 
+/* Conteneur principal */
 .container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
+  max-width: 1200px; /* Largeur maximale */
+  margin: 0 auto; /* Centrage horizontal */
+  padding: 0 20px; /* Padding horizontal */
 }
 
+/* Style de l'en-tête */
 header {
-  background: #2c3e50;
-  color: white;
-  padding: 1rem 0;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-  position: sticky;
-  top: 0;
-  z-index: 1000;
+  background: #2c3e50; /* Couleur de fond */
+  color: white; /* Couleur du texte */
+  padding: 1rem 0; /* Padding vertical */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Ombre */
+  position: sticky; /* Position fixe en haut */
+  top: 0; /* Collé en haut */
+  z-index: 1000; /* Niveau de superposition */
 }
 
+/* Conteneur de l'en-tête */
 header .container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  display: flex; /* Affichage flex */
+  justify-content: space-between; /* Espacement entre les éléments */
+  align-items: center; /* Alignement vertical au centre */
 }
 
+/* Style du logo */
 header .logo h1 {
-  font-size: 2.5rem;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
+  font-size: 2.5rem; /* Taille de la police */
+  font-weight: bold; /* Texte en gras */
+  display: flex; /* Affichage flex */
+  align-items: center; /* Alignement vertical au centre */
 }
 
+/* Icone du logo */
 header .logo i {
-  margin-right: 10px;
+  margin-right: 10px; /* Marge à droite */
 }
 
+/* Style de la navigation */
 nav ul {
-  list-style: none;
-  display: flex;
-  padding: 0;
-  margin: 0;
+  list-style: none; /* Aucune puce */
+  display: flex; /* Affichage flex */
+  padding: 0; /* Aucun padding */
+  margin: 0; /* Aucune marge */
 }
 
+/* Style des éléments de la navigation */
 nav ul li {
-  margin: 0 15px;
+  margin: 0 15px; /* Marge horizontale */
 }
 
+/* Style des liens de navigation */
 nav ul li a {
-  color: white;
-  text-decoration: none;
-  font-weight: 600;
-  padding: 0.8rem 1.2rem;
-  border-radius: 10px;
-  transition: background 0.3s, box-shadow 0.3s;
-  display: flex;
-  align-items: center;
+  color: white; /* Couleur du texte */
+  text-decoration: none; /* Aucun soulignement */
+  font-weight: 600; /* Texte en semi-gras */
+  padding: 0.8rem 1.2rem; /* Padding */
+  border-radius: 10px; /* Bordures arrondies */
+  transition: background 0.3s, box-shadow 0.3s; /* Transition douce */
+  display: flex; /* Affichage flex */
+  align-items: center; /* Alignement vertical au centre */
 }
 
+/* Icone des liens de navigation */
 nav ul li a i {
-  margin-right: 5px;
+  margin-right: 5px; /* Marge à droite */
 }
 
+/* Effet au survol des liens de navigation */
 nav ul li a:hover {
-  background-color: #34495e;
-  box-shadow: 0 2px 5px rgba(52, 73, 94, 0.4);
+  background-color: #34495e; /* Couleur de fond au survol */
+  box-shadow: 0 2px 5px rgba(52, 73, 94, 0.4); /* Ombre au survol */
 }
 
+/* Style principal */
 main {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 2rem;
+  flex: 1; /* Prend tout l'espace disponible */
+  display: flex; /* Affichage flex */
+  justify-content: center; /* Centrage horizontal */
+  align-items: center; /* Alignement vertical au centre */
+  padding: 2rem; /* Padding */
 }
 
+/* Style de la section héro */
 .hero {
-  background-color: #ffffff;
-  padding: 2rem;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 600px;
-  text-align: center;
+  background-color: #ffffff; /* Couleur de fond */
+  padding: 2rem; /* Padding */
+  border-radius: 10px; /* Bordures arrondies */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Ombre */
+  width: 100%; /* Largeur de 100% */
+  max-width: 600px; /* Largeur maximale */
+  text-align: center; /* Alignement du texte au centre */
 }
 
+/* Groupe d'input */
 .input-group {
-  margin-bottom: 20px;
+  margin-bottom: 20px; /* Marge inférieure */
 }
 
+/* Label des inputs */
 .input-group label {
-  font-size: 1rem;
-  color: #35495e;
-  display: flex;
-  align-items: center;
-  gap: 10px;
+  font-size: 1rem; /* Taille de la police */
+  color: #35495e; /* Couleur du texte */
+  display: flex; /* Affichage flex */
+  align-items: center; /* Alignement vertical au centre */
+  gap: 10px; /* Espacement entre les éléments */
 }
 
+/* Style des inputs et textarea */
 .input-group input,
 .input-group textarea {
-  width: 100%;
-  padding: 12px;
-  margin-top: 5px;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  font-size: 1rem;
+  width: 100%; /* Largeur de 100% */
+  padding: 12px; /* Padding */
+  margin-top: 5px; /* Marge supérieure */
+  border: 1px solid #ccc; /* Bordure */
+  border-radius: 10px; /* Bordures arrondies */
+  font-size: 1rem; /* Taille de la police */
 }
 
+/* Effet au focus des inputs et textarea */
 .input-group input:focus,
 .input-group textarea:focus {
-  border-color: #2c3e50;
+  border-color: #2c3e50; /* Couleur de la bordure au focus */
 }
 
+/* Bouton d'appel à l'action */
 .cta-button {
-  width: 100%;
-  padding: 15px;
-  border-radius: 10px;
-  font-size: 1rem;
-  background-color: #2c3e50;
-  color: white;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  margin-top: 20px;
+  width: 100%; /* Largeur de 100% */
+  padding: 15px; /* Padding */
+  border-radius: 10px; /* Bordures arrondies */
+  font-size: 1rem; /* Taille de la police */
+  background-color: #2c3e50; /* Couleur de fond */
+  color: white; /* Couleur du texte */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Ombre */
+  cursor: pointer; /* Curseur de la souris */
+  display: flex; /* Affichage flex */
+  justify-content: center; /* Centrage horizontal */
+  align-items: center; /* Alignement vertical au centre */
+  gap: 10px; /* Espacement entre les éléments */
+  margin-top: 20px; /* Marge supérieure */
 }
-/* Style for 'Remember me' checkbox with improved alignment and design */
+
+/* Style du checkbox "Se souvenir de moi" */
 .remember-me {
-  display: flex;
-  align-items: center;
-  margin: 20px 0;
-  font-size: 1rem;
-  color: #35495e;
-
-  input[type="checkbox"] {
-    margin-right: 10px;
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
-
-    // Styling for better checkbox appearance
-    accent-color: #3498db;
-  }
-
-  label {
-    cursor: pointer;
-  }
+  display: flex; /* Affichage flex */
+  align-items: center; /* Alignement vertical au centre */
+  margin: 20px 0; /* Marge verticale */
+  font-size: 1rem; /* Taille de la police */
+  color: #35495e; /* Couleur du texte */
 }
-/* Styles for password visibility toggle and password generation button */
+
+/* Input checkbox "Se souvenir de moi" */
+.remember-me input[type="checkbox"] {
+  margin-right: 10px; /* Marge à droite */
+  width: 20px; /* Largeur */
+  height: 20px; /* Hauteur */
+  cursor: pointer; /* Curseur de la souris */
+  accent-color: #3498db; /* Couleur de l'accent */
+}
+
+/* Label pour le checkbox "Se souvenir de moi" */
+.remember-me label {
+  cursor: pointer; /* Curseur de la souris */
+}
+
+/* Bouton pour voir le mot de passe et générer un mot de passe */
 .toggle-password,
 .generate-password {
-  background: none;
-  border: none;
-  color: #2c3e50;
-  cursor: pointer;
-  font-size: 1.2rem;
-  padding: 5px;
-  margin-left: 10px;
-
-  &:hover {
-    color: #34495e;
-  }
-
-  i {
-    vertical-align: middle;
-  }
+  background: none; /* Aucun fond */
+  border: none; /* Aucune bordure */
+  color: #2c3e50; /* Couleur du texte */
+  cursor: pointer; /* Curseur de la souris */
+  font-size: 1.2rem; /* Taille de la police */
+  padding: 5px; /* Padding */
+  margin-left: 10px; /* Marge à gauche */
 }
 
-/* Password strength bar styling */
+/* Effet au survol pour les boutons de mot de passe */
+.toggle-password:hover,
+.generate-password:hover {
+  color: #34495e; /* Couleur du texte au survol */
+}
+
+/* Icone des boutons de mot de passe */
+.toggle-password i,
+.generate-password i {
+  vertical-align: middle; /* Alignement vertical au milieu */
+}
+
+/* Barre de force du mot de passe */
 .password-strength-bar {
-  width: 100%;
-  height: 5px;
-  background-color: #ccc;
-  margin-top: 5px;
-  border-radius: 5px;
-
-  &.weak {
-    background-color: #e74c3c;
-  }
-
-  &.medium {
-    background-color: #f39c12;
-  }
-
-  &.strong {
-    background-color: #27ae60;
-  }
+  width: 100%; /* Largeur de 100% */
+  height: 5px; /* Hauteur */
+  background-color: #ccc; /* Couleur de fond */
+  margin-top: 5px; /* Marge supérieure */
+  border-radius: 5px; /* Bordures arrondies */
 }
 
+/* Couleurs de la barre de force du mot de passe */
+.password-strength-bar.weak {
+  background-color: #e74c3c; /* Faible */
+}
+.password-strength-bar.medium {
+  background-color: #f39c12; /* Moyen */
+}
+.password-strength-bar.strong {
+  background-color: #27ae60; /* Fort */
+}
+
+/* Effet au survol du bouton d'appel à l'action */
 .cta-button:hover {
-  background-color: #34495e;
-  box-shadow: 0 6px 20px rgba(41, 128, 185, 0.4);
+  background-color: #34495e; /* Couleur de fond au survol */
+  box-shadow: 0 6px 20px rgba(41, 128, 185, 0.4); /* Ombre au survol */
 }
 
+/* Style du pied de page */
 footer {
-  background-color: #35495e;
-  color: white;
-  text-align: center;
-  padding: 1rem 0;
-  width: 100%;
-  border-top: 5px solid #35495e;
+  background-color: #35495e; /* Couleur de fond */
+  color: white; /* Couleur du texte */
+  text-align: center; /* Alignement du texte au centre */
+  padding: 1rem 0; /* Padding vertical */
+  width: 100%; /* Largeur de 100% */
+  border-top: 5px solid #35495e; /* Bordure supérieure */
 }
 
+/* Contenu du pied de page */
 footer .footer-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  display: flex; /* Affichage flex */
+  justify-content: space-between; /* Espacement entre les éléments */
+  align-items: center; /* Alignement vertical au centre */
 }
 
+/* Liens des réseaux sociaux */
 footer .social-media a {
-  color: white;
-  font-size: 1.5rem;
-  margin: 0 10px;
-  transition: color 0.3s;
+  color: white; /* Couleur du texte */
+  font-size: 1.5rem; /* Taille de la police */
+  margin: 0 10px; /* Marge horizontale */
+  transition: color 0.3s; /* Transition douce */
 }
 
+/* Effet au survol des liens des réseaux sociaux */
 footer .social-media a:hover {
-  color: #35495e;
+  color: #35495e; /* Couleur du texte au survol */
 }
 
+/* Animation de fondu */
 @keyframes fadeIn {
   from {
-    opacity: 0;
+    opacity: 0; /* Opacité de départ */
   }
   to {
-    opacity: 1;
+    opacity: 1; /* Opacité de fin */
   }
 }
 
+/* Animation de fondu vers le haut */
 @keyframes fadeInUp {
   from {
-    opacity: 0;
-    transform: translateY(20px);
+    opacity: 0; /* Opacité de départ */
+    transform: translateY(20px); /* Départ vers le bas */
   }
   to {
-    opacity: 1;
-    transform: translateY(0);
+    opacity: 1; /* Opacité de fin */
+    transform: translateY(0); /* Fin à la position initiale */
   }
 }
 
+/* Media queries pour les écrans de moins de 768px */
 @media (max-width: 768px) {
   nav ul {
-    flex-direction: column;
+    flex-direction: column; /* Affichage en colonne */
   }
 
   nav ul li {
-    margin: 10px 0;
+    margin: 10px 0; /* Marge verticale */
   }
 
   .form-container {
-    width: 90%;
+    width: 90%; /* Largeur de 90% */
   }
 
   footer .footer-content {
-    flex-direction: column;
+    flex-direction: column; /* Affichage en colonne */
   }
 
   footer .social-media {
-    margin-top: 10px;
+    margin-top: 10px; /* Marge supérieure */
   }
 }

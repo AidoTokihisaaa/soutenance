@@ -1,247 +1,247 @@
-@charset "utf-8";
+@charset "utf-8"; // Définit l'encodage de caractères du fichier CSS
 
-@import 'node_modules/normalize.css';
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
-@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css");
-@import url("https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css");
+@import 'node_modules/normalize.css'; // Importe le fichier de normalisation CSS pour rendre les styles plus cohérents entre les navigateurs
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"); // Importe la police "Poppins" de Google Fonts
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"); // Importe les icônes Font Awesome
+@import url("https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"); // Importe les animations CSS d'Animate.css
 
 /* Styles de base */
 body, html {
-  height: 100%;
-  margin: 0;
-  font-family: 'Poppins', sans-serif;
-  background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
-  color: #35495e;
-  display: flex;
-  flex-direction: column;
+  height: 100%; // Définit la hauteur à 100% pour body et html
+  margin: 0; // Supprime les marges par défaut
+  font-family: 'Poppins', sans-serif; // Définit la police de caractères
+  background: linear-gradient(135deg, #f5f7fa, #c3cfe2); // Applique un fond en dégradé
+  color: #35495e; // Définit la couleur du texte
+  display: flex; // Utilise Flexbox
+  flex-direction: column; // Aligne les éléments en colonne
 }
 
 .container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
+  max-width: 1200px; // Définit la largeur maximale du conteneur
+  margin: 0 auto; // Centre le conteneur horizontalement
+  padding: 0 20px; // Ajoute un padding horizontal
 }
 
 header {
-  background: #35495e;
-  color: white;
-  padding: 1rem 0;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-  position: sticky;
-  top: 0;
-  z-index: 1000;
+  background: #35495e; // Définit la couleur de fond
+  color: white; // Définit la couleur du texte
+  padding: 1rem 0; // Ajoute un padding vertical
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); // Ajoute une ombre
+  position: sticky; // Rend l'en-tête collant en haut
+  top: 0; // Positionne en haut
+  z-index: 1000; // Définir l'ordre de superposition
 }
 
 header .container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  display: flex; // Utilise Flexbox
+  justify-content: space-between; // Espace les éléments de manière égale
+  align-items: center; // Aligne les éléments au centre verticalement
 }
 
 header .logo h1 {
-  font-size: 2.5rem;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
+  font-size: 2.5rem; // Définit la taille de la police
+  font-weight: bold; // Met en gras le texte
+  display: flex; // Utilise Flexbox
+  align-items: center; // Aligne les éléments au centre verticalement
 }
 
 header .logo i {
-  margin-right: 10px;
+  margin-right: 10px; // Ajoute une marge à droite de l'icône
 }
 
 nav ul {
-  list-style: none;
-  display: flex;
-  padding: 0;
-  margin: 0;
+  list-style: none; // Supprime les puces de liste
+  display: flex; // Utilise Flexbox
+  padding: 0; // Supprime le padding
+  margin: 0; // Supprime la marge
 }
 
 nav ul li {
-  margin: 0 15px;
+  margin: 0 15px; // Ajoute une marge horizontale
 }
 
 nav ul li a {
-  color: white;
-  text-decoration: none;
-  font-weight: 600;
-  padding: 0.8rem 1.2rem;
-  border-radius: 10px;
-  transition: background 0.3s, box-shadow 0.3s;
-  display: flex;
-  align-items: center;
+  color: white; // Définit la couleur du texte
+  text-decoration: none; // Supprime la décoration de texte
+  font-weight: 600; // Met en gras le texte
+  padding: 0.8rem 1.2rem; // Ajoute un padding
+  border-radius: 10px; // Arrondit les bords
+  transition: background 0.3s, box-shadow 0.3s; // Ajoute une transition pour les propriétés de fond et d'ombre
+  display: flex; // Utilise Flexbox
+  align-items: center; // Aligne les éléments au centre verticalement
 }
 
 nav ul li a i {
-  margin-right: 5px;
+  margin-right: 5px; // Ajoute une marge à droite de l'icône
 }
 
 nav ul li a:hover {
-  background-color: #35495e;
-  box-shadow: 0 2px 5px rgba(52, 73, 94, 0.4);
+  background-color: #35495e; // Change la couleur de fond au survol
+  box-shadow: 0 2px 5px rgba(52, 73, 94, 0.4); // Ajoute une ombre au survol
 }
 
 main {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 2rem;
+  flex: 1; // Prend toute la place disponible verticalement
+  display: flex; // Utilise Flexbox
+  justify-content: center; // Centre horizontalement
+  align-items: center; // Centre verticalement
+  padding: 2rem; // Ajoute un padding
 }
 
 .form-container {
-  background-color: #ffffff;
-  padding: 40px;
-  border-radius: 10px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 600px;
-  text-align: center;
-  animation: fadeInUp 0.5s ease-in-out;
+  background-color: #ffffff; // Définit la couleur de fond
+  padding: 40px; // Ajoute un padding
+  border-radius: 10px; // Arrondit les bords
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); // Ajoute une ombre
+  width: 100%; // Prend toute la largeur disponible
+  max-width: 600px; // Définit une largeur maximale
+  text-align: center; // Centre le texte
+  animation: fadeInUp 0.5s ease-in-out; // Applique une animation
 }
 
 h2 {
-  font-size: 2rem;
-  color: #35495e;
-  margin-bottom: 20px;
+  font-size: 2rem; // Définit la taille de la police
+  color: #35495e; // Définit la couleur du texte
+  margin-bottom: 20px; // Ajoute une marge inférieure
 }
 
 .form-group {
-  margin-bottom: 20px;
+  margin-bottom: 20px; // Ajoute une marge inférieure
 }
 
 .form-group label {
-  font-size: 1rem;
-  color: #35495e;
-  display: flex;
-  align-items: center;
-  gap: 10px;
+  font-size: 1rem; // Définit la taille de la police
+  color: #35495e; // Définit la couleur du texte
+  display: flex; // Utilise Flexbox
+  align-items: center; // Aligne les éléments au centre verticalement
+  gap: 10px; // Ajoute un espacement entre les éléments
 }
 
 .form-group input {
-  width: 100%;
-  padding: 12px;
-  margin-top: 5px;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  font-size: 1rem;
-  transition: border-color 0.3s;
+  width: 100%; // Prend toute la largeur disponible
+  padding: 12px; // Ajoute un padding
+  margin-top: 5px; // Ajoute une marge supérieure
+  border: 1px solid #ccc; // Définit la bordure
+  border-radius: 10px; // Arrondit les bords
+  font-size: 1rem; // Définit la taille de la police
+  transition: border-color 0.3s; // Ajoute une transition pour la couleur de la bordure
 }
 
 .form-group input:focus {
-  border-color: #35495e;
+  border-color: #35495e; // Change la couleur de la bordure quand l'input est en focus
 }
 
 .btn {
-  width: 100%;
-  padding: 15px;
-  border-radius: 10px;
-  font-size: 1rem;
-  background-color: #35495e;
-  color: white;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  margin-top: 20px;
-  transition: background-color 0.3s, box-shadow 0.3s;
+  width: 100%; // Prend toute la largeur disponible
+  padding: 15px; // Ajoute un padding
+  border-radius: 10px; // Arrondit les bords
+  font-size: 1rem; // Définit la taille de la police
+  background-color: #35495e; // Définit la couleur de fond
+  color: white; // Définit la couleur du texte
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); // Ajoute une ombre
+  cursor: pointer; // Change le curseur en pointeur
+  display: flex; // Utilise Flexbox
+  justify-content: center; // Centre horizontalement
+  align-items: center; // Centre verticalement
+  gap: 10px; // Ajoute un espacement entre les éléments
+  margin-top: 20px; // Ajoute une marge supérieure
+  transition: background-color 0.3s, box-shadow 0.3s; // Ajoute une transition pour les propriétés de fond et d'ombre
 }
 
 .btn i {
-  margin-right: 5px;
+  margin-right: 5px; // Ajoute une marge à droite de l'icône
 }
 
 .btn:hover {
-  background-color: #35495e;
-  box-shadow: 0 6px 20px rgba(41, 128, 185, 0.4);
+  background-color: #35495e; // Change la couleur de fond au survol
+  box-shadow: 0 6px 20px rgba(41, 128, 185, 0.4); // Ajoute une ombre au survol
 }
 
 .alert {
-  padding: 15px;
-  margin-bottom: 20px;
-  border: 1px solid transparent;
-  border-radius: 10px;
-  font-size: 1rem;
-  text-align: left;
+  padding: 15px; // Ajoute un padding
+  margin-bottom: 20px; // Ajoute une marge inférieure
+  border: 1px solid transparent; // Définit la bordure transparente
+  border-radius: 10px; // Arrondit les bords
+  font-size: 1rem; // Définit la taille de la police
+  text-align: left; // Aligne le texte à gauche
 }
 
 .alert-success {
-  color: #155724;
-  background-color: #d4edda;
-  border-color: #c3e6cb;
+  color: #155724; // Définit la couleur du texte
+  background-color: #d4edda; // Définit la couleur de fond
+  border-color: #c3e6cb; // Définit la couleur de la bordure
 }
 
 .alert-danger {
-  color: #721c24;
-  background-color: #f8d7da;
-  border-color: #f5c6cb;
+  color: #721c24; // Définit la couleur du texte
+  background-color: #f8d7da; // Définit la couleur de fond
+  border-color: #f5c6cb; // Définit la couleur de la bordure
 }
 
 footer {
-  background-color: #35495e;
-  color: white;
-  text-align: center;
-  padding: 1rem 0;
-  width: 100%;
-  border-top: 5px solid #35495e;
+  background-color: #35495e; // Définit la couleur de fond
+  color: white; // Définit la couleur du texte
+  text-align: center; // Centre le texte
+  padding: 1rem 0; // Ajoute un padding vertical
+  width: 100%; // Prend toute la largeur disponible
+  border-top: 5px solid #35495e; // Ajoute une bordure supérieure
 }
 
 footer .footer-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  display: flex; // Utilise Flexbox
+  justify-content: space-between; // Espace les éléments de manière égale
+  align-items: center; // Aligne les éléments au centre verticalement
 }
 
 footer .social-media a {
-  color: white;
-  font-size: 1.5rem;
-  margin: 0 10px;
-  transition: color 0.3s;
+  color: white; // Définit la couleur du texte
+  font-size: 1.5rem; // Définit la taille de la police
+  margin: 0 10px; // Ajoute une marge horizontale
+  transition: color 0.3s; // Ajoute une transition pour la couleur
 }
 
 footer .social-media a:hover {
-  color: #35495e;
+  color: #35495e; // Change la couleur du texte au survol
 }
 
 @keyframes fadeIn {
   from {
-    opacity: 0;
+    opacity: 0; // Opacité initiale
   }
   to {
-    opacity: 1;
+    opacity: 1; // Opacité finale
   }
 }
 
 @keyframes fadeInUp {
   from {
-    opacity: 0;
-    transform: translateY(20px);
+    opacity: 0; // Opacité initiale
+    transform: translateY(20px); // Translation initiale
   }
   to {
-    opacity: 1;
-    transform: translateY(0);
+    opacity: 1; // Opacité finale
+    transform: translateY(0); // Translation finale
   }
 }
 
 @media (max-width: 768px) {
   nav ul {
-    flex-direction: column;
+    flex-direction: column; // Aligne les éléments en colonne
   }
 
   nav ul li {
-    margin: 10px 0;
+    margin: 10px 0; // Ajoute une marge verticale
   }
 
   .form-container {
-    width: 90%;
+    width: 90%; // Prend 90% de la largeur
   }
 
   footer .footer-content {
-    flex-direction: column;
+    flex-direction: column; // Aligne les éléments en colonne
   }
 
   footer .social-media {
-    margin-top: 10px;
+    margin-top: 10px; // Ajoute une marge supérieure
   }
 }

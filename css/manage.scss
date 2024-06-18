@@ -1,529 +1,529 @@
-@charset "utf-8";
-@import 'node_modules/normalize.css';
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
-@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css");
+@charset "utf-8"; // Définir l'encodage de caractères du fichier CSS
+@import 'node_modules/normalize.css'; // Importer les styles de normalisation pour assurer une meilleure compatibilité entre les navigateurs
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"); // Importer la police Poppins de Google Fonts
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"); // Importer les icônes de Font Awesome
 
 /* Variables */
-$primary-color: #34495e;
-$secondary-color: #2c3e50;
-$background-gradient: linear-gradient(135deg, #f5f7fa, #c3cfe2);
-$text-color: #35495e;
-$hover-color: #2980b9;
-$alert-color: #2ecc71;
-$danger-color: #e74c3c;
-$success-color: #2ecc71;
+$primary-color: #34495e; // Couleur principale
+$secondary-color: #2c3e50; // Couleur secondaire
+$background-gradient: linear-gradient(135deg, #f5f7fa, #c3cfe2); // Dégradé de fond
+$text-color: #35495e; // Couleur du texte
+$hover-color: #2980b9; // Couleur au survol
+$alert-color: #2ecc71; // Couleur d'alerte
+$danger-color: #e74c3c; // Couleur de danger
+$success-color: #2ecc71; // Couleur de succès
 
 body, html {
-  height: 100%;
-  margin: 0;
-  font-family: 'Poppins', sans-serif;
-  background: $background-gradient;
-  color: $text-color;
-  display: flex;
-  flex-direction: column;
+  height: 100%; // Définit la hauteur à 100%
+  margin: 0; // Supprime les marges par défaut
+  font-family: 'Poppins', sans-serif; // Applique la police Poppins
+  background: $background-gradient; // Applique le dégradé de fond
+  color: $text-color; // Applique la couleur du texte
+  display: flex; // Utilise Flexbox pour la disposition
+  flex-direction: column; // Définit la direction des éléments en colonne
 }
 
 .container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
-  flex: 1;
+  max-width: 1200px; // Définit la largeur maximale du conteneur
+  margin: 0 auto; // Centre le conteneur
+  padding: 20px; // Ajoute un padding de 20px
+  flex: 1; // Permet au conteneur de prendre toute la hauteur disponible
 }
 
 header {
-  background: $secondary-color;
-  color: white;
-  padding: 0.8rem 0;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
-  position: sticky;
-  top: 0;
-  z-index: 1000;
+  background: $secondary-color; // Couleur de fond de l'en-tête
+  color: white; // Couleur du texte
+  padding: 0.8rem 0; // Ajoute un padding vertical
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25); // Ajoute une ombre portée
+  position: sticky; // Rendre l'en-tête collant en haut
+  top: 0; // Positionne l'en-tête en haut
+  z-index: 1000; // Met l'en-tête en avant-plan
 }
 
 header .container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  display: flex; // Utilise Flexbox pour la disposition
+  justify-content: space-between; // Espacement égal entre les éléments
+  align-items: center; // Aligne les éléments verticalement au centre
 }
 
 header .logo {
-  display: flex;
-  align-items: center;
-  margin-right: auto; /* Pousse la nav vers le centre */
+  display: flex; // Utilise Flexbox pour la disposition
+  align-items: center; // Aligne les éléments verticalement au centre
+  margin-right: auto; // Pousse la nav vers le centre
 }
 
 header .logo h1 {
-  font-size: 1.2rem; /* Taille uniforme */
-  font-weight: bold;
-  display: flex;
-  align-items: center;
+  font-size: 1.2rem; // Définit la taille de la police
+  font-weight: bold; // Met le texte en gras
+  display: flex; // Utilise Flexbox pour la disposition
+  align-items: center; // Aligne les éléments verticalement au centre
 }
 
 header .logo i {
-  margin-right: 8px;
-  font-size: 1.2rem; /* Taille uniforme */
+  margin-right: 8px; // Ajoute une marge à droite de l'icône
+  font-size: 1.2rem; // Définit la taille de l'icône
 }
 
 nav {
-  flex-grow: 1;
-  display: flex;
-  justify-content: center; /* Centre la nav */
+  flex-grow: 1; // Permet à la nav de prendre toute la place disponible
+  display: flex; // Utilise Flexbox pour la disposition
+  justify-content: center; // Centre horizontalement la nav
 }
 
 nav ul {
-  list-style: none;
-  display: flex;
-  padding: 0;
-  margin: 0;
-  align-items: center;
+  list-style: none; // Supprime les puces de liste
+  display: flex; // Utilise Flexbox pour la disposition
+  padding: 0; // Supprime le padding par défaut
+  margin: 0; // Supprime la marge par défaut
+  align-items: center; // Aligne les éléments verticalement au centre
 }
 
 nav ul li {
-  margin: 0 8px;
+  margin: 0 8px; // Ajoute une marge horizontale
 }
 
 nav ul li a {
-  color: white;
-  text-decoration: none;
-  font-weight: 600;
-  padding: 0.4rem 0.8rem; /* Uniform padding */
-  border-radius: 5px;
-  transition: background 0.3s, box-shadow 0.3s;
-  display: flex;
-  align-items: center;
-  font-size: 0.9rem; /* Taille uniforme du texte */
+  color: white; // Couleur du texte
+  text-decoration: none; // Supprime la décoration de texte
+  font-weight: 600; // Met le texte en gras
+  padding: 0.4rem 0.8rem; // Ajoute un padding uniforme
+  border-radius: 5px; // Arrondit les coins
+  transition: background 0.3s, box-shadow 0.3s; // Ajoute des transitions pour le fond et l'ombre
+  display: flex; // Utilise Flexbox pour la disposition
+  align-items: center; // Aligne les éléments verticalement au centre
+  font-size: 0.9rem; // Définit la taille de la police
 }
 
 nav ul li a i {
-  margin-right: 5px;
-  font-size: 0.9rem; /* Taille uniforme des icônes */
+  margin-right: 5px; // Ajoute une marge à droite de l'icône
+  font-size: 0.9rem; // Définit la taille de l'icône
 }
 
 nav ul li a:hover {
-  background-color: $hover-color;
-  box-shadow: 0 4px 8px rgba(41, 128, 185, 0.5);
+  background-color: $hover-color; // Change la couleur de fond au survol
+  box-shadow: 0 4px 8px rgba(41, 128, 185, 0.5); // Ajoute une ombre au survol
 }
 
 main {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 2rem 0;
-  background: white;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-  border-radius: 8px;
+  flex: 1; // Permet à main de prendre toute la hauteur disponible
+  display: flex; // Utilise Flexbox pour la disposition
+  justify-content: center; // Centre horizontalement le contenu
+  align-items: flex-start; // Aligne les éléments au début verticalement
+  padding: 2rem 0; // Ajoute un padding vertical
+  background: white; // Définit la couleur de fond
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); // Ajoute une ombre portée
+  border-radius: 8px; // Arrondit les coins
 }
 
 nav ul li .dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: white;
-  color: $primary-color;
-  min-width: 200px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  z-index: 1;
-  right: 0;
-  border-radius: 10px;
-  overflow: hidden;
-  padding: 15px;
-  transition: all 0.3s ease;
+  display: none; // Masque le contenu du menu déroulant
+  position: absolute; // Position absolue pour le menu déroulant
+  background-color: white; // Couleur de fond du menu déroulant
+  color: $primary-color; // Couleur du texte
+  min-width: 200px; // Largeur minimale du menu déroulant
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); // Ajoute une ombre portée
+  z-index: 1; // Met le menu déroulant en avant-plan
+  right: 0; // Positionne le menu déroulant à droite
+  border-radius: 10px; // Arrondit les coins
+  overflow: hidden; // Masque le débordement
+  padding: 15px; // Ajoute un padding
+  transition: all 0.3s ease; // Ajoute une transition pour tous les changements
 }
 
 nav ul li .dropdown-content .user-info {
-  background-color: white;
-  color: $primary-color;
-  padding: 10px;
-  border-radius: 10px;
-  margin-bottom: 10px;
-  text-align: left;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: white; // Couleur de fond de la section user-info
+  color: $primary-color; // Couleur du texte
+  padding: 10px; // Ajoute un padding
+  border-radius: 10px; // Arrondit les coins
+  margin-bottom: 10px; // Ajoute une marge inférieure
+  text-align: left; // Aligne le texte à gauche
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); // Ajoute une ombre portée
 }
 
 nav ul li .dropdown-content p,
 nav ul li .dropdown-content a {
-  color: $primary-color;
-  padding: 10px;
-  text-decoration: none;
-  display: block;
-  transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
-  border-radius: 10px;
+  color: $primary-color; // Couleur du texte
+  padding: 10px; // Ajoute un padding
+  text-decoration: none; // Supprime la décoration de texte
+  display: block; // Affiche les éléments en bloc
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease; // Ajoute des transitions pour les changements
+  border-radius: 10px; // Arrondit les coins
 }
 
 nav ul li .dropdown-content p:hover,
 nav ul li .dropdown-content a:hover {
-  background-color: $hover-color;
-  color: white;
-  transform: scale(1.05);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: $hover-color; // Change la couleur de fond au survol
+  color: white; // Change la couleur du texte au survol
+  transform: scale(1.05); // Agrandit légèrement les éléments au survol
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); // Ajoute une ombre au survol
 }
 
 nav ul li .dropdown-content.show {
-  display: block;
-  opacity: 1;
-  transform: translateY(0);
+  display: block; // Affiche le menu déroulant
+  opacity: 1; // Opacité totale
+  transform: translateY(0); // Aucun déplacement vertical
 }
 
 nav ul li .dropdown-content.hidden {
-  opacity: 0;
-  transform: translateY(-10px);
-  pointer-events: none;
+  opacity: 0; // Opacité nulle
+  transform: translateY(-10px); // Déplacement vertical vers le haut
+  pointer-events: none; // Désactive les interactions
 }
 
 .manage-container {
-  width: 100%;
-  text-align: center;
+  width: 100%; // Prend toute la largeur disponible
+  text-align: center; // Centre le texte
 }
 
 .manage-header {
-  text-align: center;
-  margin-bottom: 40px;
-  font-size: 2.5rem;
-  font-weight: 600;
-  color: $primary-color;
+  text-align: center; // Centre le texte
+  margin-bottom: 40px; // Ajoute une marge inférieure
+  font-size: 2.5rem; // Définit la taille de la police
+  font-weight: 600; // Met le texte en gras
+  color: $primary-color; // Couleur du texte
 }
 
 .events-grid {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 20px;
-  padding: 20px;
+  display: flex; // Utilise Flexbox pour la disposition
+  justify-content: center; // Centre horizontalement le contenu
+  flex-wrap: wrap; // Permet le retour à la ligne des éléments
+  gap: 20px; // Espace entre les éléments
+  padding: 20px; // Ajoute un padding
 }
 
 .event-card {
-  background: white;
-  border-radius: 15px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  transition: transform 0.3s;
-  width: 300px;
-  margin: 0 10px;
+  background: white; // Couleur de fond
+  border-radius: 15px; // Arrondit les coins
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); // Ajoute une ombre portée
+  overflow: hidden; // Masque le débordement
+  display: flex; // Utilise Flexbox pour la disposition
+  flex-direction: column; // Définit la direction des éléments en colonne
+  transition: transform 0.3s; // Ajoute une transition pour la transformation
+  width: 300px; // Définit la largeur de la carte
+  margin: 0 10px; // Ajoute une marge horizontale
 }
 
 .event-card:hover {
-  transform: translateY(-10px);
+  transform: translateY(-10px); // Déplace la carte vers le haut au survol
 }
 
 .event-header {
-  background: $primary-color;
-  color: white;
-  padding: 15px;
-  text-align: center;
+  background: $primary-color; // Couleur de fond
+  color: white; // Couleur du texte
+  padding: 15px; // Ajoute un padding
+  text-align: center; // Centre le texte
 }
 
 .event-body {
-  flex: 1;
-  padding: 15px;
+  flex: 1; // Permet au corps de prendre toute la place disponible
+  padding: 15px; // Ajoute un padding
 }
 
 .event-footer {
-  display: flex;
-  justify-content: space-around;
-  padding: 15px;
-  background: #f9f9f9;
+  display: flex; // Utilise Flexbox pour la disposition
+  justify-content: space-around; // Espacement égal entre les boutons
+  padding: 15px; // Ajoute un padding
+  background: #f9f9f9; // Couleur de fond
 }
 
 .event-footer .btn {
-  padding: 10px 15px;
-  border-radius: 5px;
-  text-decoration: none;
-  color: white;
-  transition: background-color 0.3s, transform 0.3s;
+  padding: 10px 15px; // Ajoute un padding
+  border-radius: 5px; // Arrondit les coins
+  text-decoration: none; // Supprime la décoration de texte
+  color: white; // Couleur du texte
+  transition: background-color 0.3s, transform 0.3s; // Ajoute des transitions pour les changements
 }
 
 .event-footer .btn:hover {
-  transform: scale(1.05);
+  transform: scale(1.05); // Agrandit légèrement les boutons au survol
 }
 
 .btn-primary {
-  background-color: $primary-color;
+  background-color: $primary-color; // Couleur de fond du bouton primaire
 }
 
 .btn-primary:hover {
-  background-color: darken($primary-color, 10%);
+  background-color: darken($primary-color, 10%); // Assombrit la couleur de fond au survol
 }
 
 .btn-danger {
-  background-color: $danger-color;
+  background-color: $danger-color; // Couleur de fond du bouton danger
 }
 
 .btn-danger:hover {
-  background-color: darken($danger-color, 10%);
+  background-color: darken($danger-color, 10%); // Assombrit la couleur de fond au survol
 }
 
 .alert {
-  padding: 15px;
-  color: white;
-  background-color: $success-color;
-  text-align: center;
-  border-radius: 5px;
-  margin-bottom: 20px;
+  padding: 15px; // Ajoute un padding
+  color: white; // Couleur du texte
+  background-color: $success-color; // Couleur de fond de l'alerte
+  text-align: center; // Centre le texte
+  border-radius: 5px; // Arrondit les coins
+  margin-bottom: 20px; // Ajoute une marge inférieure
 }
 
 footer {
-  background-color: $secondary-color;
-  color: white;
-  text-align: center;
-  padding: 1rem 0;
-  width: 100%;
-  border-top: 5px solid darken($secondary-color, 10%);
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  background-color: $secondary-color; // Couleur de fond
+  color: white; // Couleur du texte
+  text-align: center; // Centre le texte
+  padding: 1rem 0; // Ajoute un padding vertical
+  width: 100%; // Prend toute la largeur disponible
+  border-top: 5px solid darken($secondary-color, 10%); // Ajoute une bordure supérieure
+  position: fixed; // Positionne le pied de page de manière fixe
+  bottom: 0; // Positionne le pied de page en bas
+  left: 0; // Positionne le pied de page à gauche
+  right: 0; // Positionne le pied de page à droite
 }
 
 footer .footer-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  display: flex; // Utilise Flexbox pour la disposition
+  justify-content: space-between; // Espace les éléments de manière égale
+  align-items: center; // Aligne les éléments au centre verticalement
 }
 
 footer .social-media a {
-  color: white;
-  font-size: 1.2rem;
-  margin: 0 10px;
-  transition: color 0.3s;
+  color: white; // Couleur du texte
+  font-size: 1.2rem; // Définit la taille de la police
+  margin: 0 10px; // Ajoute une marge horizontale
+  transition: color 0.3s; // Ajoute une transition pour la couleur
 }
 
 footer .social-media a:hover {
-  color: darken($secondary-color, 10%);
+  color: darken($secondary-color, 10%); // Change la couleur du texte au survol
 }
 
 /* notifications.css */
 .notification-menu {
-  position: relative;
+  position: relative; // Position relative pour le menu de notifications
 }
 
 .notification-count {
-  background-color: #e74c3c;
-  color: white;
-  border-radius: 50%;
-  padding: 2px 6px;
-  font-size: 0.8rem;
-  position: absolute;
-  top: -5px;
-  right: -5px;
+  background-color: #e74c3c; // Couleur de fond de l'icône de notification
+  color: white; // Couleur du texte
+  border-radius: 50%; // Forme circulaire
+  padding: 2px 6px; // Ajoute un padding
+  font-size: 0.8rem; // Taille de la police
+  position: absolute; // Position absolue
+  top: -5px; // Positionne en haut
+  right: -5px; // Positionne à droite
 }
 
 .notifications {
-  display: none;
-  position: absolute;
-  background-color: white;
-  color: #34495e;
-  min-width: 200px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  z-index: 1;
-  right: 0;
-  border-radius: 10px;
-  overflow: hidden;
-  padding: 15px;
-  transition: all 0.3s ease;
+  display: none; // Masque les notifications
+  position: absolute; // Position absolue
+  background-color: white; // Couleur de fond
+  color: #34495e; // Couleur du texte
+  min-width: 200px; // Largeur minimale
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); // Ajoute une ombre portée
+  z-index: 1; // Met les notifications en avant-plan
+  right: 0; // Positionne à droite
+  border-radius: 10px; // Arrondit les coins
+  overflow: hidden; // Masque le débordement
+  padding: 15px; // Ajoute un padding
+  transition: all 0.3s ease; // Ajoute une transition pour tous les changements
 }
 
 .notifications h3 {
-  font-size: 1rem;
-  margin-bottom: 10px;
+  font-size: 1rem; // Taille de la police
+  margin-bottom: 10px; // Ajoute une marge inférieure
 }
 
 .notifications ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+  list-style: none; // Supprime les puces de liste
+  padding: 0; // Supprime le padding
+  margin: 0; // Supprime la marge
 }
 
 .notifications ul li {
-  padding: 10px;
-  border-bottom: 1px solid #ecf0f1;
+  padding: 10px; // Ajoute un padding
+  border-bottom: 1px solid #ecf0f1; // Ajoute une bordure inférieure
 }
 
 .notifications ul li:last-child {
-  border-bottom: none;
+  border-bottom: none; // Supprime la bordure pour le dernier élément
 }
 
 .notifications ul li i {
-  margin-right: 10px;
-  color: #2980b9;
+  margin-right: 10px; // Ajoute une marge à droite de l'icône
+  color: #2980b9; // Couleur de l'icône
 }
 
 .notifications ul li small {
-  display: block;
-  color: #7f8c8d;
-  font-size: 0.8rem;
+  display: block; // Affiche l'élément en bloc
+  color: #7f8c8d; // Couleur du texte
+  font-size: 0.8rem; // Taille de la police
 }
 
 .notifications.show {
-  display: block;
-  opacity: 1;
-  transform: translateY(0);
+  display: block; // Affiche les notifications
+  opacity: 1; // Opacité totale
+  transform: translateY(0); // Aucun déplacement vertical
 }
 
 .notifications.hidden {
-  opacity: 0;
-  transform: translateY(-10px);
-  pointer-events: none;
+  opacity: 0; // Opacité nulle
+  transform: translateY(-10px); // Déplacement vertical vers le haut
+  pointer-events: none; // Désactive les interactions
 }
 
 .mark-read-form .mark-read-btn {
-  background-color: #27ae60;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s, transform 0.3s;
+  background-color: #27ae60; // Couleur de fond du bouton
+  color: white; // Couleur du texte
+  border: none; // Supprime la bordure
+  padding: 10px 20px; // Ajoute un padding
+  border-radius: 5px; // Arrondit les coins
+  cursor: pointer; // Change le curseur au survol
+  transition: background-color 0.3s, transform 0.3s; // Ajoute des transitions pour les changements
 }
 
 .mark-read-form .mark-read-btn:hover {
-  background-color: darken(#27ae60, 10%);
-  transform: scale(1.05);
+  background-color: darken(#27ae60, 10%); // Assombrit la couleur de fond au survol
+  transform: scale(1.05); // Agrandit légèrement le bouton au survol
 }
 
 .btn {
-  display: inline-block;
-  background-color: #34495e;
-  color: #fff;
-  border: none;
-  padding: 8px 15px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background 0.3s;
-  margin-top: 10px;
-  text-transform: uppercase;
-  text-align: center;
+  display: inline-block; // Affiche l'élément en ligne
+  background-color: #34495e; // Couleur de fond
+  color: #fff; // Couleur du texte
+  border: none; // Supprime la bordure
+  padding: 8px 15px; // Ajoute un padding
+  font-size: 0.9rem; // Taille de la police
+  font-weight: 600; // Met le texte en gras
+  border-radius: 5px; // Arrondit les coins
+  cursor: pointer; // Change le curseur au survol
+  transition: background 0.3s; // Ajoute une transition pour la couleur de fond
+  margin-top: 10px; // Ajoute une marge supérieure
+  text-transform: uppercase; // Met le texte en majuscules
+  text-align: center; // Centre le texte
 }
 
 .btn:hover {
-  background-color: darken(#34495e, 10%);
+  background-color: darken(#34495e, 10%); // Assombrit la couleur de fond au survol
 }
 
 @keyframes fadeIn {
   from {
-    opacity: 0;
+    opacity: 0; // Opacité nulle
   }
   to {
-    opacity: 1;
+    opacity: 1; // Opacité totale
   }
 }
 
 @keyframes fadeInUp {
   from {
-    opacity: 0;
-    transform: translateY(20px);
+    opacity: 0; // Opacité nulle
+    transform: translateY(20px); // Déplacement vertical vers le bas
   }
   to {
-    opacity: 1;
-    transform: translateY(0);
+    opacity: 1; // Opacité totale
+    transform: translateY(0); // Aucun déplacement vertical
   }
 }
 
 .modal {
-  display: none;
-  position: fixed;
-  z-index: 1000;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.4);
-  transition: all 0.3s ease;
+  display: none; // Masque la modal
+  position: fixed; // Position fixe
+  z-index: 1000; // Met la modal en avant-plan
+  left: 0; // Positionne à gauche
+  top: 0; // Positionne en haut
+  width: 100%; // Prend toute la largeur disponible
+  height: 100%; // Prend toute la hauteur disponible
+  overflow: auto; // Ajoute une barre de défilement si nécessaire
+  background-color: rgba(0, 0, 0, 0.4); // Ajoute un fond semi-transparent
+  transition: all 0.3s ease; // Ajoute une transition pour tous les changements
 }
 
 .modal.show {
-  display: block;
-  animation: fadeIn 0.5s;
+  display: block; // Affiche la modal
+  animation: fadeIn 0.5s; // Ajoute une animation d'apparition
 }
 
 .modal-content {
-  background-color: #fefefe;
-  margin: 15% auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
-  max-width: 500px;
-  border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-  text-align: center;
-  animation: fadeInUp 0.5s;
+  background-color: #fefefe; // Couleur de fond
+  margin: 15% auto; // Centre verticalement et horizontalement
+  padding: 20px; // Ajoute un padding
+  border: 1px solid #888; // Ajoute une bordure
+  width: 80%; // Définit la largeur
+  max-width: 500px; // Définit la largeur maximale
+  border-radius: 10px; // Arrondit les coins
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); // Ajoute une ombre portée
+  text-align: center; // Centre le texte
+  animation: fadeInUp 0.5s; // Ajoute une animation d'apparition
 }
 
 .modal-buttons {
-  margin-top: 20px;
+  margin-top: 20px; // Ajoute une marge supérieure
 }
 
 .modal-buttons .btn {
-  margin: 5px;
-  padding: 10px 20px;
-  border-radius: 5px;
-  font-size: 1rem;
-  cursor: pointer;
+  margin: 5px; // Ajoute une marge
+  padding: 10px 20px; // Ajoute un padding
+  border-radius: 5px; // Arrondit les coins
+  font-size: 1rem; // Taille de la police
+  cursor: pointer; // Change le curseur au survol
 }
 
 .success-message {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  width: 300px;
-  background: #28a745;
-  color: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-  display: none;
-  animation: fadeInUp 0.5s;
+  position: fixed; // Position fixe
+  top: 20px; // Positionne en haut
+  right: 20px; // Positionne à droite
+  width: 300px; // Définit la largeur
+  background: #28a745; // Couleur de fond
+  color: white; // Couleur du texte
+  padding: 20px; // Ajoute un padding
+  border-radius: 10px; // Arrondit les coins
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); // Ajoute une ombre portée
+  display: none; // Masque le message
+  animation: fadeInUp 0.5s; // Ajoute une animation d'apparition
 }
 
 .success-message.show {
-  display: block;
+  display: block; // Affiche le message
 }
 
 .message-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  display: flex; // Utilise Flexbox pour la disposition
+  justify-content: space-between; // Espace les éléments de manière égale
+  align-items: center; // Aligne les éléments verticalement au centre
 }
 
 .progress-bar {
-  height: 5px;
-  background: #218838;
-  width: 0;
-  margin-top: 10px;
-  animation: progressBar 3s linear forwards;
+  height: 5px; // Hauteur de la barre de progression
+  background: #218838; // Couleur de fond
+  width: 0; // Largeur initiale
+  margin-top: 10px; // Ajoute une marge supérieure
+  animation: progressBar 3s linear forwards; // Ajoute une animation de progression
 }
 
 @media (max-width: 768px) {
   nav ul {
-    flex-direction: column;
+    flex-direction: column; // Disposition en colonne pour les petits écrans
   }
 
   nav ul li {
-    margin: 10px 0;
+    margin: 10px 0; // Ajoute une marge verticale
   }
 
   .form-container {
-    width: 90%;
+    width: 90%; // Prend 90% de la largeur disponible
   }
 
   footer .footer-content {
-    flex-direction: column;
+    flex-direction: column; // Disposition en colonne pour les petits écrans
   }
 
   footer .social-media {
-    margin-top: 10px;
+    margin-top: 10px; // Ajoute une marge supérieure
   }
 }
 
 @keyframes progressBar {
   0% {
-    width: 0;
+    width: 0; // Largeur initiale
   }
   100% {
-    width: 100%;
+    width: 100%; // Largeur finale
   }
 }

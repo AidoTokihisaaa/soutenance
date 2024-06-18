@@ -2,6 +2,7 @@
   "extends": "./tsconfig.json",
   "include": [
     "src/**/*.ts",
-    "frontend/js/**/*.js"
+    "frontend/js/**/*.js",
+    "index.js",
   ]
 }

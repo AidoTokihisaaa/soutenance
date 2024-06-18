@@ -1,19 +1,34 @@
 <?php
+// Démarrer une session
 session_start();
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Validation de l'email
-    if (empty(trim($_POST["email"]))) {
-        $email_err = "Veuillez entrer votre adresse e-mail.";
-    } elseif (!filter_var(trim($_POST["email"]), FILTER_VALIDATE_EMAIL)) {
-        $email_err = "Veuillez entrer une adresse e-mail valide.";
+// Inclure le fichier de configuration de la base de données
+require_once '../../config/database.php';
+
+// Vérifier si la méthode de la requête est POST et si le champ 'email' est défini
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['email'])) {
+    // Récupérer l'email soumis par le formulaire
+    $email = $_POST["email"];
+    
+    // Créer une nouvelle instance de la classe Database et obtenir la connexion à la base de données
+    $database = new Database();
+    $conn = $database->getConnection();
+
+    // Préparer une requête SQL pour sélectionner un utilisateur par email
+    $query = $conn->prepare("SELECT * FROM users WHERE email = ?");
+    $query->bindParam(1, $email);
+    $query->execute();
+
+    // Vérifier si un utilisateur avec cet email existe
+    if ($query->rowCount() > 0) {
+        // Simuler l'envoi d'un email
+        $_SESSION['message'] = "Si cet e-mail est enregistré chez nous, un lien de réinitialisation de mot de passe sera envoyé.";
     } else {
-        // Traitement de la réinitialisation du mot de passe
-        $email = trim($_POST["email"]);
-        // Redirection vers le script de traitement
-        header("Location: process_forgot_password.php?email=" . urlencode($email));
-        exit;
+        $_SESSION['message'] = "Aucun compte trouvé avec cet e-mail.";
     }
+    // Rediriger vers la page forgot_password.php
+    header("Location: forgot_password.php");
+    exit;
 }
 ?>
 
@@ -23,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mot de Passe Oublié</title>
-    <link rel="stylesheet" href="../../../css/reset.scss">
+    <link rel="stylesheet" href="../../../css/reset.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
@@ -35,8 +50,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <nav>
                 <ul>
                     <li><a href="../../../index.php"><i class="fas fa-home"></i> Accueil</a></li>
-                    <li><a href="../../../backend/views/user/login.php"><i class="fas fa-sign-in-alt"></i> Connexion</a></li>
-                    <li><a href="../../../backend/views/user/register.php"><i class="fas fa-user-plus"></i> Inscription</a></li>
+                    <li><a href="login.php"><i class="fas fa-sign-in-alt"></i> Connexion</a></li>
+                    <li><a href="register.php"><i class="fas fa-user-plus"></i> Inscription</a></li>
                     <li><a href="about.php"><i class="fas fa-info-circle"></i> À Propos</a></li>
                     <li><a href="contact.php"><i class="fas fa-envelope"></i> Contact</a></li>
                 </ul>
@@ -49,11 +64,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <?php if(isset($_SESSION['message'])): ?>
                 <div class="alert alert-success">
                     <?php echo $_SESSION['message']; unset($_SESSION['message']); ?>
-                </div>
-            <?php endif; ?>
-            <?php if(!empty($email_err)): ?>
-                <div class="alert alert-danger">
-                    <?php echo $email_err; ?>
                 </div>
             <?php endif; ?>
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
@@ -76,7 +86,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
                 <p>&copy; 2024 AppEvent. Tous droits réservés.</p>
             </div>
-        </div>
     </footer>
 </body>
 </html>

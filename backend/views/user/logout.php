@@ -1,4 +1,5 @@
 <?php
+// Démarrer une session
 session_start();
 
 // Vider toutes les variables de session
